@@ -1,0 +1,37 @@
+
+// SCROLL BAR
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $button-primary-color;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $button-primary-hover-color;
+}
+
+// BASIC ELEMENTS
+
+* {
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  font-family: $main-font;
+}
+html, body {
+  height: 100%;
+  background-color: $background-color;
+  color: $font-primary-color;
+  overflow: auto;
+}

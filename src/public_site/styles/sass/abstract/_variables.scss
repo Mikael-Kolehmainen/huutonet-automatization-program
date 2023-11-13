@@ -1,0 +1,22 @@
+// FONT FAMILY
+
+@font-face {
+  font-family: NAME-HERE;
+  src: url(/src/public_site/font/.ttf);
+}
+$main-font: NAME-HERE;
+
+// FONT COLORS
+
+$font-primary-color: white;
+
+// MAIN COLORS
+
+$primary-color: black;
+$secondary-color: black;
+$background-color: #1A202C;
+
+// BUTTON COLORS
+
+$button-primary-color: white;
+$button-primary-hover-color: white;

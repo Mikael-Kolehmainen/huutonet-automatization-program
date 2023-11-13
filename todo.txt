@@ -1,0 +1,15 @@
+TODO:
+- Index page
+  - Frontend
+- New post page
+  - Frontend
+  - Backend
+- Browse post page
+  - Frontend
+  - Backend
+    - Delete post
+    - Change dates for multiple posts
+- Edit post page
+  - Frontend
+  - Backend
+- Create posts on Huutonet with API

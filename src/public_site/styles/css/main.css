@@ -1,0 +1,37 @@
+@font-face {
+  font-family: NAME-HERE;
+  src: url(/src/public_site/font/.ttf); }
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px; }
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; }
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: white; }
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: white; }
+
+* {
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  font-family: NAME-HERE; }
+
+html, body {
+  height: 100%;
+  background-color: #1A202C;
+  color: white;
+  overflow: auto; }
+
+a i {
+  width: 50%;
+  height: 50%; }
+  a i.fa-example {
+    background: url("/src/public_site/media/icons/.svg") no-repeat center; }
