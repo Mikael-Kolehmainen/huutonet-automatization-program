@@ -11,7 +11,7 @@ class HeaderController
       <header>
         <h1>Huutonet automatisointi ohjelma</h1>
         <nav>
-          <a href='#' class='btn'>Uusi ilmoitus</a>
+          <a href='/index.php/new-post' class='btn'>Uusi ilmoitus</a>
           <a href='/index.php/browse-posts' class='btn'>Selaa ilmoituksia</a>
         </nav>
       </header>

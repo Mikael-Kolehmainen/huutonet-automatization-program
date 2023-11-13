@@ -64,6 +64,12 @@ function showBrowse(): void
 	$browseController->showBrowsePage();
 }
 
+function showNew(): void
+{
+	$newController = new NewController();
+	$newController->showNewPage();
+}
+
 /**
  * @param string $title
  * @param string $message
