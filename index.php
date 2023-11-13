@@ -3,6 +3,7 @@
 use public_site\controller\ErrorController;
 use public_site\controller\HomeController;
 use public_site\controller\BrowseController;
+use public_site\controller\NewController;
 use api\manager\ServerRequestManager;
 
 require __DIR__ . "/src/inc/bootstrap.php";
@@ -28,6 +29,9 @@ switch ($uri[2]) {
     break;
 	case "browse-posts":
 		showBrowse();
+		break;
+	case "new-post":
+		showNew();
 		break;
   case "error":
     showError("Error title", "This is the error page.", "/index.php");

@@ -24,6 +24,10 @@ class BrowseController
           <label for='active-time-end'>Aukioloaika - päättyy</label>
           <input type='date' name='active-time-end'>
         </div>
+        <label for='huutonet-username'>Huutonet käyttäjänimi:</label>
+        <input type='text' name='huutonet-username' required>
+        <label for='huutonet-password'>Huutonet salasana:</label>
+        <input type='password' name='huutonet-password required>
         <input type='submit' value='Luo valittut ilmoitukset Huutonet:iin'>
       </form>
     ";
