@@ -1,10 +1,11 @@
 // FONT FAMILY
 
 @font-face {
-  font-family: NAME-HERE;
-  src: url(/src/public_site/font/.ttf);
+  font-family: montserrat;
+  src: url(../../font/Montserrat-Regular.ttf);
+  font-display: swap;
 }
-$main-font: NAME-HERE;
+$main-font-family: montserrat;
 
 // FONT COLORS
 

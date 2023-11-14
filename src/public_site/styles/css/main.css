@@ -1,6 +1,15 @@
 @font-face {
-  font-family: NAME-HERE;
-  src: url(/src/public_site/font/.ttf); }
+  font-family: montserrat;
+  src: url(../../font/Montserrat-Regular.ttf);
+  font-display: swap; }
+
+header {
+  padding: 40px 0px 40px 0px; }
+  header h1 {
+    font-size: 38px;
+    text-align: center;
+    font-weight: normal;
+    padding-bottom: 40px; }
 
 /* width */
 ::-webkit-scrollbar {
@@ -22,7 +31,7 @@
   scroll-behavior: smooth;
   margin: 0;
   padding: 0;
-  font-family: NAME-HERE; }
+  font-family: montserrat; }
 
 html, body {
   height: 100%;
