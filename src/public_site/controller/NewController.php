@@ -65,7 +65,7 @@ class NewController
         <label for='7-days'>7 päivää</label>
         <input type='checkbox' id='only-to-identified-users' name='only-to-identified-users'>
         <label for='only-to-identified-users'>Myyn vain tunnistautuneille käyttäjille</label>
-        <input type='submit' value='Luo ilmoitus tietokantaan'>
+        <input type='submit' class='btn' value='Luo ilmoitus tietokantaan'>
       </form>
     ";
   }

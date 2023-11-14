@@ -10,6 +10,11 @@ header {
     text-align: center;
     font-weight: normal;
     padding-bottom: 40px; }
+  header nav {
+    width: fit-content;
+    margin: auto; }
+    header nav .btn {
+      margin: 2.5px; }
 
 /* width */
 ::-webkit-scrollbar {
@@ -21,11 +26,11 @@ header {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: white; }
+  background: #2D303D; }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: white; }
+  background: #3E454E; }
 
 * {
   scroll-behavior: smooth;
@@ -36,7 +41,7 @@ header {
 html, body {
   height: 100%;
   background-color: #1A202C;
-  color: white;
+  color: snow;
   overflow: auto; }
 
 a i {
@@ -44,3 +49,19 @@ a i {
   height: 50%; }
   a i.fa-example {
     background: url("/src/public_site/media/icons/.svg") no-repeat center; }
+
+.btn {
+  text-decoration: none;
+  color: snow;
+  padding: 10px 15px;
+  background-color: #2D303D;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: none;
+  border: none; }
+  .btn:hover {
+    cursor: pointer;
+    background-color: #3E454E; }
+  .btn:active {
+    background-color: #50555F; }

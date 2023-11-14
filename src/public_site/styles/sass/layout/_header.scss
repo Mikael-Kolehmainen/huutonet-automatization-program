@@ -7,4 +7,12 @@ header {
     font-weight: normal;
     padding-bottom: 40px;
   }
+  nav {
+    width: fit-content;
+    margin: auto;
+
+    .btn {
+      margin: 2.5px;
+    }
+  }
 }

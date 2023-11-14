@@ -29,7 +29,7 @@ class BrowseController
         </div>
         <input type='text' name='huutonet-username' placeholder='Huutonet käyttäjänimi' required>
         <input type='password' name='huutonet-password' placeholder='Huutonet salasana' required>
-        <input type='submit' value='Luo valittut ilmoitukset Huutonet:iin'>
+        <input type='submit' class='btn' value='Luo valittut ilmoitukset Huutonet:iin'>
       </form>
     ";
   }
