@@ -11,6 +11,8 @@ class NewController
     $this->showHeader();
 
     echo "
+        <script src='/src/public_site/js/eventListeners/isOutsideOfFinland.js' defer></script>
+      </head>
       <section>
         <h2>Luo ilmoitus</h2>
         <form>
@@ -31,7 +33,7 @@ class NewController
             <label for='weak'>Heikko</label>
           </div>
           <div class='input-with-checkbox'>
-            <input type='text' placeholder='Postinumero' name='zip-code'>
+            <input type='text' placeholder='Postinumero' id='zip-code' name='zip-code'>
             <input type='checkbox' id='is-outside-of-finland' name='is-outside-of-finland'>
             <label for='is-outside-of-finland'>Tuote sijaitsee Suomen ulkopuolella</label>
           </div>
