@@ -11,26 +11,34 @@ class BrowseController
     $this->showHeader();
 
     echo "
-      <h2>Ilmoitukset</h2>
-      <form>
-        <table>
+      <section>
+        <h2>Ilmoitukset</h2>
+        <form>
+          <table>
 
-        </table>
-        <input type='checkbox' name='change-active-time'>
-        <label for='change-active-time'>Määritä aukioloaika kaikkille valituille ilmoituksille.</label>
-        <div id='active-time-changers'>
-          <label for='active-time-start'>Aukioloaika - alku</label>
-          <input type='date' name='active-time-start'>
-          <label for='active-time-end'>Aukioloaika - päättyy</label>
-          <input type='radio' id='14-days' value='14 päivää' name='active-time-end'>
-          <label for='14-days'>14 päivää</label>
-          <input type='radio' id='7-days' value='7 päivää' name='active-time-end'>
-          <label for='7-days'>7 päivää</label>
-        </div>
-        <input type='text' name='huutonet-username' placeholder='Huutonet käyttäjänimi' required>
-        <input type='password' name='huutonet-password' placeholder='Huutonet salasana' required>
-        <input type='submit' class='btn' value='Luo valittut ilmoitukset Huutonet:iin'>
-      </form>
+          </table>
+          <div>
+            <input type='checkbox' id='change-active-time' name='change-active-time'>
+            <label for='change-active-time'>Määritä aukioloaika kaikkille valituille ilmoituksille.</label>
+          </div>
+          <div id='active-time-changers'>
+            <label for='active-time-start'>Aukioloaika - alku</label>
+            <input type='date' name='active-time-start'>
+            <label for='active-time-end'>Aukioloaika - päättyy</label>
+            <div class='radio-group'>
+              <input type='radio' id='14-days' value='14 päivää' name='active-time-end'>
+              <label for='14-days'>14 päivää</label>
+              <input type='radio' id='7-days' value='7 päivää' name='active-time-end'>
+              <label for='7-days'>7 päivää</label>
+            </div>
+          </div>
+          <input type='text' name='huutonet-username' placeholder='Huutonet käyttäjänimi' required>
+          <input type='password' name='huutonet-password' placeholder='Huutonet salasana' required>
+          <div class='btn-container'>
+            <input type='submit' class='btn' value='Luo valittut ilmoitukset Huutonet:iin'>
+          </div>
+        </form>
+      </section>
     ";
   }
 

@@ -73,7 +73,7 @@ a i {
 form {
   width: 60%;
   margin: auto auto 50px auto; }
-  form input[type=text], form textarea, form input[type=number], form input[type=date] {
+  form input[type=text], form textarea, form input[type=number], form input[type=date], form input[type=password] {
     display: block;
     box-sizing: border-box;
     width: 100%;
