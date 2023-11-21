@@ -1,13 +1,9 @@
+const zipCodeInputId = "zip-code";
+const isOutsideOfFinlandCheckboxId = "is-outside-of-finland";
+
 const showHideZipCodeInput = () => {
-  const isOutsideOfFinlandCheckbox = document.getElementById("is-outside-of-finland");
-  const zipCodeInputId = "zip-code";
-
-  if (isOutsideOfFinlandCheckbox.checked) {
-    ElementDisplay.change(zipCodeInputId, "none");
-    return
-  }
-
-  ElementDisplay.change(zipCodeInputId, "inline-block");
+  ElementDisplay.changeBasedOnCheckbox(isOutsideOfFinlandCheckboxId, zipCodeInputId);
+  ElementDisplay.disableOrEnable(zipCodeInputId);
 };
 
-document.addEventListener("change", showHideZipCodeInput)
+document.getElementById(isOutsideOfFinlandCheckboxId).addEventListener("change", showHideZipCodeInput);

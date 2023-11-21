@@ -12,6 +12,7 @@ class NewController
 
     echo "
         <script src='/src/public_site/js/eventListeners/isOutsideOfFinland.js' defer></script>
+        <script src='/src/public_site/js/eventListeners/isDelivery.js' defer></script>
       </head>
       <section>
         <h2>Luo ilmoitus</h2>
@@ -60,7 +61,7 @@ class NewController
             <label for='is-fetch'>Nouto</label>
             <input type='checkbox' id='is-delivery' name='is-delivery'>
             <label for='is-delivery'>Toimitus</label>
-            <input type='number' placeholder='Toimituskulut Suomeen' name='delivery-fee'>
+            <input type='number' placeholder='Toimituskulut Suomeen' id='delivery-fee' name='delivery-fee' style='display: none;' disabled>
           </div>
           <textarea placeholder='Muut toimitus-/palautusehdot' name='delivery-terms'></textarea>
           <div>
