@@ -1,3 +1,4 @@
+<p>NOTE: readme not ready!</p>
 <h1>Basic-Project-Structure</h1>
 <h2>About</h2>
 <p style='font-size: 16px; text-align: justify; text-justify: inter-word;'>
