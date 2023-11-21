@@ -14,6 +14,7 @@ class NewController
         <script src='/src/public_site/js/eventListeners/isOutsideOfFinland.js' defer></script>
         <script src='/src/public_site/js/eventListeners/isDelivery.js' defer></script>
         <script src='/src/public_site/js/eventListeners/sellType.js' defer></script>
+        <script src='/src/public_site/js/eventListeners/updateMinimumRaise.js' defer></script>
       </head>
       <section>
         <h2>Luo ilmoitus</h2>
@@ -52,8 +53,8 @@ class NewController
             <label for='auction'>Huutokauppa</label>
           </div>
           <div class='input-with-checkbox'>
-            <input type='number' placeholder='Hinta' name='price' required>
-            <input type='number' placeholder='Minimikorotus' id='minimum-raise' name='minimum-raise' style='display: none;' disabled>
+            <input type='number' placeholder='Hinta' id='price' name='price' required>
+            <input type='number' placeholder='Minimikorotus' value='0' id='minimum-raise' name='minimum-raise' style='display: none;' disabled>
             <input type='checkbox' id='is-price-suggestion' name='is-price-suggestion'>
             <label for='is-price-suggestion'>Ostaja saa ehdottaa hintaa</label>
           </div>
