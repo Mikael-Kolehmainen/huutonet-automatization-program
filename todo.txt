@@ -1,15 +1,22 @@
 TODO:
-- Index page
-  - Frontend
+- Index page - COMPLETE
+  - Frontend - COMPLETE
 - New post page
-  - Frontend
+  - Frontend - UNDER WORK
+    - Image selector.
+    - Display chosen images.
+    - Fetch category names from Huutonet API for category dropdown.
   - Backend
+    - Create post in database.
 - Browse post page
   - Frontend
+    - Display posts from database.
   - Backend
     - Delete post
     - Change dates for multiple posts
+    - Create posts on Huutonet with API
 - Edit post page
   - Frontend
+    - Show current values and then inputs for changing them.
   - Backend
-- Create posts on Huutonet with API
+    - Update post
