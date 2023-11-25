@@ -31,15 +31,15 @@ class NewController
           </div>
           <p>Kunto:</p>
           <div class='radio-group'>
-            <input type='radio' id='new' value='4' name='item-condition'>
+            <input type='radio' id='new' value='new' name='item-condition'>
             <label for='new'>Uusi</label>
-            <input type='radio' id='like-new' value='3' name='item-condition'>
+            <input type='radio' id='like-new' value='like-new' name='item-condition'>
             <label for='like-new'>Uudenveroinen</label>
-            <input type='radio' id='good' value='2' name='item-condition' checked>
+            <input type='radio' id='good' value='good' name='item-condition' checked>
             <label for='good'>Hyvä</label>
-            <input type='radio' id='acceptable' value='1' name='item-condition'>
+            <input type='radio' id='acceptable' value='acceptable' name='item-condition'>
             <label for='acceptable'>Tyydyttävä</label>
-            <input type='radio' id='weak' value='0' name='item-condition'>
+            <input type='radio' id='weak' value='weak' name='item-condition'>
             <label for='weak'>Heikko</label>
           </div>
           <div class='input-with-checkbox'>
@@ -53,7 +53,7 @@ class NewController
           <div class='radio-group'>
             <input type='radio' id='buy-now' value='Osta heti' name='sell-type' required checked>
             <label for='buy-now'>Osta heti</label>
-            <input type='radio' id='auction'  value='Huutokauppa' name='sell-type' required>
+            <input type='radio' id='auction' value='Huutokauppa' name='sell-type' required>
             <label for='auction'>Huutokauppa</label>
           </div>
           <div class='input-with-checkbox'>
