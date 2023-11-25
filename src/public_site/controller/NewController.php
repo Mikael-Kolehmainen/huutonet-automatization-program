@@ -12,6 +12,7 @@ class NewController
     $this->showHeader();
 
     echo "
+        <title>Luo ilmoitus</title>
         <script src='/src/public_site/js/eventListeners/isOutsideOfFinland.js' defer></script>
         <script src='/src/public_site/js/eventListeners/isDelivery.js' defer></script>
         <script src='/src/public_site/js/eventListeners/sellType.js' defer></script>
@@ -20,7 +21,7 @@ class NewController
       </head>
       <section>
         <h2>Luo ilmoitus</h2>
-        <form>
+        <form action='/index.php/post/insert' method='POST' enctype='multipart/form-data'>
           <input type='text' placeholder='Otsikko' name='title' required>
           <textarea placeholder='Kuvaus' name='description' required></textarea>
           <div class='image-container' id='post-image-container'>
@@ -51,14 +52,14 @@ class NewController
     echo "
           <p>Myyntitapa:</p>
           <div class='radio-group'>
-            <input type='radio' id='buy-now' value='Osta heti' name='sell-type' required checked>
+            <input type='radio' id='buy-now' value='buy-now' name='sell-type' required checked>
             <label for='buy-now'>Osta heti</label>
-            <input type='radio' id='auction' value='Huutokauppa' name='sell-type' required>
+            <input type='radio' id='auction' value='auction' name='sell-type' required>
             <label for='auction'>Huutokauppa</label>
           </div>
           <div class='input-with-checkbox'>
-            <input type='number' placeholder='Hinta' id='price' name='price' required>
-            <input type='number' placeholder='Minimikorotus' value='0' id='minimum-raise' name='minimum-raise' style='display: none;' disabled>
+            <input type='number' placeholder='Hinta' id='price' name='price' step='.01' required>
+            <input type='number' placeholder='Minimikorotus' id='minimum-raise' name='minimum-raise' step='.01' style='display: none;' disabled>
             <input type='checkbox' id='is-price-suggestion' name='is-price-suggestion'>
             <label for='is-price-suggestion'>Ostaja saa ehdottaa hintaa</label>
           </div>
@@ -67,7 +68,7 @@ class NewController
             <label for='is-fetch'>Nouto</label>
             <input type='checkbox' id='is-delivery' name='is-delivery'>
             <label for='is-delivery'>Toimitus</label>
-            <input type='number' placeholder='Toimituskulut Suomeen' id='delivery-fee' name='delivery-fee' style='display: none;' disabled>
+            <input type='number' placeholder='Toimituskulut Suomeen' id='delivery-fee' name='delivery-fee' step='.01' style='display: none;' disabled>
           </div>
           <textarea placeholder='Muut toimitus-/palautusehdot' name='delivery-terms'></textarea>
           <div>
@@ -81,13 +82,13 @@ class NewController
             <label for='is-mobilepay'>Mobilepay</label>
           </div>
           <textarea placeholder='Muut maksuehdot' name='payment-terms'></textarea>
-          <label for='active-time-start'>Aukioloaika - alku</label>
-          <input type='date' name='active-time-start' required>
+          <label for='active-time-begin'>Aukioloaika - alku</label>
+          <input type='date' name='active-time-begin' required>
           <p>Aukioloaika - päättyy</p>
           <div class='radio-group'>
-            <input type='radio' id='14-days' value='14 päivää' name='active-time-end' required checked>
+            <input type='radio' id='14-days' value='14' name='active-time-end' required checked>
             <label for='14-days'>14 päivää</label>
-            <input type='radio' id='7-days' value='7 päivää' name='active-time-end' required>
+            <input type='radio' id='7-days' value='7' name='active-time-end' required>
             <label for='7-days'>7 päivää</label>
           </div>
           <div>
@@ -95,7 +96,7 @@ class NewController
             <label for='only-to-identified-users'>Myyn vain tunnistautuneille käyttäjille</label>
           </div>
           <div class='btn-container'>
-            <input type='submit' class='btn' value='Luo ilmoitus tietokantaan'>
+            <input type='submit' class='btn' name='create-post' value='Luo ilmoitus tietokantaan'>
           </div>
         </form>
       </section>

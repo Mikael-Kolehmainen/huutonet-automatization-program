@@ -4,6 +4,7 @@ use public_site\controller\ErrorController;
 use public_site\controller\HomeController;
 use public_site\controller\BrowseController;
 use public_site\controller\NewController;
+use public_site\controller\PostController;
 use api\manager\ServerRequestManager;
 
 require __DIR__ . "/src/inc/bootstrap.php";
@@ -28,12 +29,30 @@ switch ($uri[2]) {
   case "":
     showHome();
     break;
+  case "new-post":
+    showNew();
+    break;
 	case "browse-posts":
 		showBrowse();
 		break;
-	case "new-post":
-		showNew();
-		break;
+  case "edit-post":
+    break;
+  case "post":
+    switch ($uri[3]) {
+      case "select":
+        break;
+      case "insert":
+        if (ServerRequestManager::issetCreatePost()) {
+          savePost();
+        }
+        break;
+      case "update":
+        break;
+      case "delete":
+        break;
+      case "upload":
+        break;
+    }
   case "error":
     showError("Error title", "This is the error page.", "/index.php");
     break;
@@ -59,16 +78,22 @@ function showHome(): void
   $homeController->showHomePage();
 }
 
+function showNew(): void
+{
+	$newController = new NewController();
+	$newController->showNewPage();
+}
+
 function showBrowse(): void
 {
 	$browseController = new BrowseController();
 	$browseController->showBrowsePage();
 }
 
-function showNew(): void
+function savePost(): void
 {
-	$newController = new NewController();
-	$newController->showNewPage();
+  $postController = new PostController();
+  $postController->savePost();
 }
 
 /**

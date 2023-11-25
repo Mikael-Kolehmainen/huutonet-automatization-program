@@ -2,12 +2,15 @@ TODO:
 - Index page - COMPLETE
   - Frontend - COMPLETE
 - New post page
-  - Frontend - UNDER WORK
+  - Frontend - COMPLETE
     - Image selector. - COMPLETE
     - Display chosen images. - COMPLETE
-    - Fetch category names from Huutonet API for category dropdown.
+    - Fetch category names from Huutonet API for category dropdown. - COMPLETE
   - Backend
-    - Create post in database.
+    - Create post in database. - UNDER WORK
+      - minimumRaise doesn't get saved to db
+      - boolean values always get saved as 0 to db
+      - Save images
 - Browse post page
   - Frontend
     - Display posts from database.

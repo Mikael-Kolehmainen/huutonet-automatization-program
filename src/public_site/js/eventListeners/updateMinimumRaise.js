@@ -15,4 +15,4 @@ const getMinimumRaise = (price) => {
   return 20;
 };
 
-document.getElementById(priceInputId).addEventListener("blur", updateMinimumRaise);
+document.getElementById(priceInputId).addEventListener("change", updateMinimumRaise);

@@ -24,7 +24,7 @@ CREATE TABLE post (
 
 CREATE TABLE image (
   id int NOT NULL AUTO_INCREMENT,
-  image_path VARCHAR(255) NOT NULL,
+  imagePath VARCHAR(255) NOT NULL,
   post_id int NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (post_id) REFERENCES post(id)
