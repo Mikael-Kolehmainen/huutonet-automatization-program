@@ -21,7 +21,10 @@ class NewController
         <form>
           <input type='text' placeholder='Otsikko' name='title' required>
           <textarea placeholder='Kuvaus' name='description' required></textarea>
-          <input type='file'>
+          <label class='image-file-input'>
+            <input type='file' name='post-image' accept='png/jpg/jpeg/gif' required>
+            <p id='file-input-text'>Lisää kuva</p>
+          </label>
           <p>Kunto:</p>
           <div class='radio-group'>
             <input type='radio' id='new' value='4' name='item-condition'>
