@@ -73,7 +73,7 @@ a i {
 form {
   width: 60%;
   margin: auto auto 50px auto; }
-  form input[type=text], form textarea, form input[type=number], form input[type=date], form input[type=password] {
+  form input[type=text], form textarea, form input[type=number], form input[type=date], form input[type=password], form select {
     display: block;
     box-sizing: border-box;
     width: 100%;
@@ -114,7 +114,7 @@ form {
     justify-content: center;
     width: 100%;
     margin: 10px auto; }
-    form .three-inputs input {
+    form .three-inputs input, form .three-inputs select {
       display: inline-block;
       width: 20%;
       margin: 0 10px; }

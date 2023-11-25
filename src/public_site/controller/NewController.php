@@ -3,6 +3,7 @@
 namespace public_site\controller;
 
 use public_site\controller\HeaderController;
+use public_site\controller\CategoryController;
 
 class NewController
 {
@@ -45,12 +46,9 @@ class NewController
             <input type='text' placeholder='Postinumero' id='zip-code' name='zip-code'>
             <input type='checkbox' id='is-outside-of-finland' name='is-outside-of-finland'>
             <label for='is-outside-of-finland'>Tuote sijaitsee Suomen ulkopuolella</label>
-          </div>
-          <div class='three-inputs'>
-            <input type='text' placeholder='Osasto 1' name='category-1' required>
-            <input type='text' placeholder='Osasto 2' name='category-2' required>
-            <input type='text' placeholder='Osasto 3' name='category-3' required>
-          </div>
+          </div>";
+          $this->showCategoriesDropdowns();
+    echo "
           <p>Myyntitapa:</p>
           <div class='radio-group'>
             <input type='radio' id='buy-now' value='Osta heti' name='sell-type' required checked>
@@ -108,5 +106,11 @@ class NewController
   {
     $headerController = new HeaderController();
     $headerController->showHeader();
+  }
+
+  private function showCategoriesDropdowns(): void
+  {
+    $categoryController = new CategoryController();
+    $categoryController->showCategories();
   }
 }
