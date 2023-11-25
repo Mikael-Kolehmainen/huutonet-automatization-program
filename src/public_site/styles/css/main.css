@@ -118,21 +118,31 @@ form {
       display: inline-block;
       width: 20%;
       margin: 0 10px; }
-  form .image-file-input {
-    position: relative;
-    display: block;
-    border-radius: 5px;
-    border: 2px solid #4287F5;
-    width: 140px;
-    height: 90px; }
-    form .image-file-input input {
-      display: none; }
-    form .image-file-input:hover {
-      cursor: pointer; }
-    form .image-file-input p {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      margin: 0;
-      white-space: nowrap; }
+  form .image-container {
+    display: flex;
+    margin-right: 5px; }
+    form .image-container img {
+      width: 140px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 5px;
+      border: 2px solid #4287F5;
+      margin: 0 5px; }
+    form .image-container .image-file-input {
+      position: relative;
+      display: block;
+      border-radius: 5px;
+      border: 2px solid #4287F5;
+      width: 140px;
+      height: 90px; }
+      form .image-container .image-file-input input {
+        display: none; }
+      form .image-container .image-file-input:hover {
+        cursor: pointer; }
+      form .image-container .image-file-input p {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        white-space: nowrap; }

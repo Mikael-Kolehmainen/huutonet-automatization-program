@@ -15,16 +15,19 @@ class NewController
         <script src='/src/public_site/js/eventListeners/isDelivery.js' defer></script>
         <script src='/src/public_site/js/eventListeners/sellType.js' defer></script>
         <script src='/src/public_site/js/eventListeners/updateMinimumRaise.js' defer></script>
+        <script src='/src/public_site/js/eventListeners/imageSelector.js' defer></script>
       </head>
       <section>
         <h2>Luo ilmoitus</h2>
         <form>
           <input type='text' placeholder='Otsikko' name='title' required>
           <textarea placeholder='Kuvaus' name='description' required></textarea>
-          <label class='image-file-input'>
-            <input type='file' name='post-image' accept='png/jpg/jpeg/gif' required>
-            <p id='file-input-text'>Lisää kuva</p>
-          </label>
+          <div class='image-container' id='post-image-container'>
+            <label class='image-file-input' id='post-image-selector'>
+              <input type='file' name='post-image' id='post-image' accept='png/jpg/jpeg/gif' multiple>
+              <p id='file-input-text'>Lisää kuva</p>
+            </label>
+          </div>
           <p>Kunto:</p>
           <div class='radio-group'>
             <input type='radio' id='new' value='4' name='item-condition'>

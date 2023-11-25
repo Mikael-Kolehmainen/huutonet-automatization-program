@@ -3,8 +3,8 @@ TODO:
   - Frontend - COMPLETE
 - New post page
   - Frontend - UNDER WORK
-    - Image selector.
-    - Display chosen images.
+    - Image selector. - COMPLETE
+    - Display chosen images. - COMPLETE
     - Fetch category names from Huutonet API for category dropdown.
   - Backend
     - Create post in database.
