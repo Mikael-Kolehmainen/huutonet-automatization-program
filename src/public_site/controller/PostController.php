@@ -18,9 +18,6 @@ class PostController
   /** @var int */
   private $postId;
 
-  /** @var string */
-  private $activeTimeBegin;
-
   /** @var Database */
   private $db;
 
@@ -60,21 +57,36 @@ class PostController
     $postModel->category = ServerRequestManager::postCategory();
     $postModel->sellType = ServerRequestManager::postSellType();
     $postModel->price = ServerRequestManager::postPrice();
-    $postModel->minimumRaise = ServerRequestManager::postMinimumRaise();
+    $postModel->minimumRaise = $this->getMinimumRaise();
     $postModel->isPriceSuggestion = ServerRequestManager::postIsPriceSuggestion();
     $postModel->deliveryId = $this->deliveryId;
     $postModel->paymentId = $this->paymentId;
-    $this->activeTimeBegin = ServerRequestManager::postActiveTimeBegin();
-    $postModel->activeTimeBegin = $this->activeTimeBegin;
+    $postModel->activeTimeBegin = ServerRequestManager::postActiveTimeBegin();
     $postModel->activeTimeEnd = $this->getActiveTimeEnd();
     $postModel->onlyToIdentifiedUsers = ServerRequestManager::postOnlyToIdentifiedUsers();
     return $postModel->save();
   }
 
-  private function getActiveTimeEnd()
+  private function getMinimumRaise()
   {
-    $activeTimeEnd = ServerRequestManager::postActiveTimeEnd();
-    return date('y-m-d', strtotime($this->activeTimeBegin . " + $activeTimeEnd days"));
+    if (ServerRequestManager::postSellType() == "buy-now") {
+      return 0;
+    }
+
+    $price = ServerRequestManager::postPrice();
+    if (!$price) return 0;
+    if ($price < 49.99) return 1;
+    if ($price < 99.99) return 2;
+    if ($price < 499.99) return 5;
+    if ($price < 999.99) return 10;
+
+    return 20;
+  }
+
+  private function getActiveTimeEnd(): string
+  {
+    $activeTimeEndDays = ServerRequestManager::postActiveTimeEnd();
+    return date('y-m-d', strtotime(ServerRequestManager::postActiveTimeBegin() . " + $activeTimeEndDays days"));
   }
 
   private function saveImageDetails()

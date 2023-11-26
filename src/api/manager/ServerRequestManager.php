@@ -26,7 +26,6 @@ class ServerRequestManager
   private const CATEGORY = "category";
   private const SELL_TYPE = "sell-type";
   private const PRICE = "price";
-  private const MINIMUM_RAISE = "minimum-raise";
   private const IS_PRICE_SUGGESTION = "is-price-suggestion";
   private const ACTIVE_TIME_BEGIN = "active-time-begin";
   private const ACTIVE_TIME_END = "active-time-end";
@@ -137,11 +136,6 @@ class ServerRequestManager
   public static function postPrice(): float
   {
     return $_POST[self::PRICE];
-  }
-
-  public static function postMinimumRaise(): float
-  {
-    return $_POST[self::MINIMUM_RAISE] ? $_POST[self::MINIMUM_RAISE] : 0.00;
   }
 
   public static function postIsPriceSuggestion(): string
