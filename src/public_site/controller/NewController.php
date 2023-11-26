@@ -45,7 +45,7 @@ class NewController
           </div>
           <div class='input-with-checkbox'>
             <input type='text' placeholder='Postinumero' id='zip-code' name='zip-code'>
-            <input type='checkbox' id='is-outside-of-finland' name='is-outside-of-finland'>
+            <input type='checkbox' id='is-outside-of-finland' value='1' name='is-outside-of-finland'>
             <label for='is-outside-of-finland'>Tuote sijaitsee Suomen ulkopuolella</label>
           </div>";
           $this->showCategoriesDropdowns();
@@ -60,25 +60,25 @@ class NewController
           <div class='input-with-checkbox'>
             <input type='number' placeholder='Hinta' id='price' name='price' step='.01' required>
             <input type='number' placeholder='Minimikorotus' id='minimum-raise' name='minimum-raise' step='.01' style='display: none;' disabled>
-            <input type='checkbox' id='is-price-suggestion' name='is-price-suggestion'>
+            <input type='checkbox' id='is-price-suggestion' value='1' name='is-price-suggestion'>
             <label for='is-price-suggestion'>Ostaja saa ehdottaa hintaa</label>
           </div>
           <div class='input-with-checkbox reversed'>
-            <input type='checkbox' id='is-fetch' name='is-fetch'>
+            <input type='checkbox' id='is-fetch' value='1' name='is-fetch'>
             <label for='is-fetch'>Nouto</label>
-            <input type='checkbox' id='is-delivery' name='is-delivery'>
+            <input type='checkbox' id='is-delivery' value='1' name='is-delivery'>
             <label for='is-delivery'>Toimitus</label>
             <input type='number' placeholder='Toimituskulut Suomeen' id='delivery-fee' name='delivery-fee' step='.01' style='display: none;' disabled>
           </div>
           <textarea placeholder='Muut toimitus-/palautusehdot' name='delivery-terms'></textarea>
           <div>
-            <input type='checkbox' id='is-bank-transfer' name='is-bank-transfer'>
+            <input type='checkbox' id='is-bank-transfer' value='1' name='is-bank-transfer'>
             <label for='is-bank-transfer'>Tilisiirto</label>
-            <input type='checkbox' id='is-cash' name='is-cash'>
+            <input type='checkbox' id='is-cash' value='1' name='is-cash'>
             <label for='is-cash'>Käteinen</label>
-            <input type='checkbox' id='is-paypal' name='is-paypal'>
+            <input type='checkbox' id='is-paypal' value='1' name='is-paypal'>
             <label for='is-paypal'>Paypal</label>
-            <input type='checkbox' id='is-mobilepay' name='is-mobilepay'>
+            <input type='checkbox' id='is-mobilepay' value='1' name='is-mobilepay'>
             <label for='is-mobilepay'>Mobilepay</label>
           </div>
           <textarea placeholder='Muut maksuehdot' name='payment-terms'></textarea>
@@ -92,7 +92,7 @@ class NewController
             <label for='7-days'>7 päivää</label>
           </div>
           <div>
-            <input type='checkbox' id='only-to-identified-users' name='only-to-identified-users'>
+            <input type='checkbox' id='only-to-identified-users' value='1' name='only-to-identified-users'>
             <label for='only-to-identified-users'>Myyn vain tunnistautuneille käyttäjille</label>
           </div>
           <div class='btn-container'>
