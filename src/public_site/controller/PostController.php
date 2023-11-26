@@ -31,6 +31,7 @@ class PostController
     $this->paymentId = $this->savePostPaymentDetails();
     $this->deliveryId = $this->savePostDeliveryDetails();
     $this->postId = $this->savePostDetails();
+    $this->saveImageDetails();
     RedirectManager::redirectToNewPost();
   }
 
@@ -89,8 +90,10 @@ class PostController
     return date('y-m-d', strtotime(ServerRequestManager::postActiveTimeBegin() . " + $activeTimeEndDays days"));
   }
 
-  private function saveImageDetails()
+  private function saveImageDetails(): void
   {
-
+    $imageController = new ImageController();
+    $imageController->postId = $this->postId;
+    $imageController->saveImages();
   }
 }

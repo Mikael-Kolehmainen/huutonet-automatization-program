@@ -41,6 +41,6 @@ class ImageModel
           $this->postId
         ]
       ]
-     );
+    );
   }
 }

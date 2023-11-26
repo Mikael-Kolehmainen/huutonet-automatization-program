@@ -30,6 +30,7 @@ class ServerRequestManager
   private const ACTIVE_TIME_BEGIN = "active-time-begin";
   private const ACTIVE_TIME_END = "active-time-end";
   private const ONLY_TO_IDENTIFIED_USERS = "only-to-identified-users";
+  private const POST_IMAGE = "post-images";
 
   public static function isPost(): bool
   {
@@ -156,5 +157,10 @@ class ServerRequestManager
   public static function postOnlyToIdentifiedUsers(): string
   {
     return $_POST[self::ONLY_TO_IDENTIFIED_USERS] ? $_POST[self::ONLY_TO_IDENTIFIED_USERS] : "0";
+  }
+
+  public static function filesImages(): array
+  {
+    return $_FILES[self::POST_IMAGE] ? $_FILES[self::POST_IMAGE] : [];
   }
 }

@@ -26,7 +26,7 @@ class NewController
           <textarea placeholder='Kuvaus' name='description' required></textarea>
           <div class='image-container' id='post-image-container'>
             <label class='image-file-input' id='post-image-selector'>
-              <input type='file' name='post-image' id='post-image' accept='png/jpg/jpeg/gif' multiple>
+              <input type='file' name='post-images[]' id='post-image' accept='png/jpg/jpeg/gif' multiple>
               <p id='file-input-text'>Lisää kuva</p>
             </label>
           </div>
