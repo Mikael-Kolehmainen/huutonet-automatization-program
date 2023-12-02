@@ -61,4 +61,30 @@ class PaymentModel
       ]
     );
   }
+
+  public function load(): PaymentModel
+  {
+    $records = $this->db->select(
+      'SELECT * FROM ' . self::TABLE_NAME . ' WHERE ' . self::FIELD_ID . ' = ?',
+      [["s"], [$this->id]]
+    );
+    $record = array_pop($records);
+    return $this->mapFromDbRecord($record);
+  }
+
+  /**
+   * @param mixed[] $record Associative array of one db record
+   * @return $this
+   */
+  public function mapFromDbRecord($record)
+  {
+    $this->id = $record[self::FIELD_ID];
+    $this->isBankTransfer = $record[self::FIELD_IS_BANK_TRANSFER];
+    $this->isCash = $record[self::FIELD_IS_CASH];
+    $this->isPaypal = $record[self::FIELD_IS_PAYPAL];
+    $this->isMobilepay = $record[self::FIELD_IS_MOBILEPAY];
+    $this->paymentTerms = $record[self::FIELD_PAYMENT_TERMS];
+
+    return $this;
+  }
 }

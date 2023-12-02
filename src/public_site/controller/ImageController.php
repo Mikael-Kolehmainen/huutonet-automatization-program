@@ -38,4 +38,12 @@ class ImageController
       $imageModel->save();
     }
   }
+
+  /** @return ImageModel[] */
+  public function getImages()
+  {
+    $imageModel = new ImageModel($this->db);
+    $imageModel->postId = $this->postId;
+    return $imageModel->load();
+  }
 }

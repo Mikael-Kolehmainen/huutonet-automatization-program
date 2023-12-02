@@ -43,4 +43,37 @@ class ImageModel
       ]
     );
   }
+
+  /** @return ImageModel[] */
+  public function load()
+  {
+    $records = $this->db->select(
+      'SELECT * FROM ' . self::TABLE_NAME,
+      []
+    );
+
+    $images = [];
+    $i = 0;
+    foreach ($records as $record) {
+      $imageModel = new ImageModel($this->db);
+      $images[$i] = $imageModel->mapFromDbRecord($record);
+
+      $i++;
+    }
+
+    return $images;
+  }
+
+  /**
+   * @param mixed[] $record Associative array of one db record
+   * @return $this
+   */
+  public function mapFromDbRecord($record)
+  {
+    $this->id = $record[self::FIELD_ID];
+    $this->imagePath = $record[self::FIELD_IMAGE_PATH];
+    $this->postId = $record[self::FIELD_POST_ID];
+
+    return $this;
+  }
 }

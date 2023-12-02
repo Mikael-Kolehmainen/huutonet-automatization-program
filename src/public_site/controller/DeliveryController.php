@@ -8,6 +8,9 @@ use api\model\DeliveryModel;
 
 class DeliveryController
 {
+  /** @var int */
+  public $deliveryId;
+
   /** @var Database */
   private $db;
 
@@ -24,5 +27,12 @@ class DeliveryController
     $deliveryModel->deliveryFee = ServerRequestManager::postDeliveryFee();
     $deliveryModel->deliveryTerms = ServerRequestManager::postDeliveryTerms();
     return $deliveryModel->save();
+  }
+
+  public function getDelivery(): DeliveryModel
+  {
+    $deliveryModel = new DeliveryModel($this->db);
+    $deliveryModel->id = $this->deliveryId;
+    return $deliveryModel->load();
   }
 }

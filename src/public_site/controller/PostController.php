@@ -96,4 +96,46 @@ class PostController
     $imageController->postId = $this->postId;
     $imageController->saveImages();
   }
+
+  public function getPosts()
+  {
+    $postModel = new PostModel($this->db);
+    $posts = $postModel->loadAll();
+
+    foreach ($posts as $post) {
+      $this->postId = $post->id;
+      $this->paymentId = $post->paymentId;
+      $this->deliveryId = $post->deliveryId;
+
+      $post->paymentDetails = $this->getPostPaymentDetails();
+      $post->deliveryDetails = $this->getPostDeliveryDetails();
+      $post->imageDetails = $this->getImageDetails();
+
+      unset($post->paymentId);
+      unset($post->deliveryId);
+    }
+
+    return $posts;
+  }
+
+  private function getPostPaymentDetails()
+  {
+    $paymentController = new PaymentController();
+    $paymentController->paymentId = $this->paymentId;
+    return $paymentController->getPayment();
+  }
+
+  private function getPostDeliveryDetails()
+  {
+    $deliveryController = new DeliveryController();
+    $deliveryController->deliveryId = $this->deliveryId;
+    return $deliveryController->getDelivery();
+  }
+
+  private function getImageDetails()
+  {
+    $imageController = new ImageController();
+    $imageController->postId = $this->postId;
+    return $imageController->getImages();
+  }
 }

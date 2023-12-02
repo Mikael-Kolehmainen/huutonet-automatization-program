@@ -55,4 +55,29 @@ class DeliveryModel
       ]
      );
   }
+
+  public function load(): DeliveryModel
+  {
+    $records = $this->db->select(
+      'SELECT * FROM ' . self::TABLE_NAME . ' WHERE ' . self::FIELD_ID . ' = ?',
+      [["s"], [$this->id]]
+    );
+    $record = array_pop($records);
+    return $this->mapFromDbRecord($record);
+  }
+
+  /**
+   * @param mixed[] $record Associative array of one db record
+   * @return $this
+   */
+  public function mapFromDbRecord($record)
+  {
+    $this->id = $record[self::FIELD_ID];
+    $this->isFetch = $record[self::FIELD_IS_FETCH];
+    $this->isDelivery = $record[self::FIELD_IS_DELIVERY];
+    $this->deliveryFee = $record[self::FIELD_DELIVERY_FEE];
+    $this->deliveryTerms = $record[self::FIELD_DELIVERY_TERMS];
+
+    return $this;
+  }
 }

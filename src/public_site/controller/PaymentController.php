@@ -8,6 +8,9 @@ use api\model\PaymentModel;
 
 class PaymentController
 {
+  /** @var int */
+  public $paymentId;
+
   /** @var Database */
   private $db;
 
@@ -25,5 +28,12 @@ class PaymentController
     $paymentModel->isMobilepay = ServerRequestManager::postIsMobilepay();
     $paymentModel->paymentTerms = ServerRequestManager::postPaymentTerms();
     return $paymentModel->save();
+  }
+
+  public function getPayment(): PaymentModel
+  {
+    $paymentModel = new PaymentModel($this->db);
+    $paymentModel->id = $this->paymentId;
+    return $paymentModel->load();
   }
 }

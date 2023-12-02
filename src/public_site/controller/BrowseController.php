@@ -15,7 +15,11 @@ class BrowseController
         <h2>Ilmoitukset</h2>
         <form>
           <table>
+    ";
 
+    $this->showPosts();
+
+    echo "
           </table>
           <div>
             <input type='checkbox' id='change-active-time' name='change-active-time'>
@@ -46,5 +50,12 @@ class BrowseController
   {
     $headerController = new HeaderController();
     $headerController->showHeader();
+  }
+
+  private function showPosts(): void
+  {
+    $postController = new PostController();
+    $posts = $postController->getPosts();
+    print_r($posts);
   }
 }
