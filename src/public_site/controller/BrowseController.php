@@ -11,6 +11,7 @@ class BrowseController
     $this->showHeader();
 
     echo "
+      <script src='/src/public_site/js/eventListeners/deletePostPopup.js' defer></script>
       <section>
         <h2>Ilmoitukset</h2>
         <form>
@@ -40,6 +41,13 @@ class BrowseController
             <input type='submit' class='btn' value='Luo valittut ilmoitukset Huutonet:iin'>
           </div>
         </form>
+        <div class='popup' id='delete-post-popup' style='display: none;'>
+          <p id='delete-post-popup-text'>Oletko varma että haluat poistaa ilmoituksen?</p>
+          <div class='btn-container'>
+            <a class='btn' id='delete-post-cancel'>En</a>
+            <a href='/index.php/post/delete' class='btn' id='delete-post-confirm'>Kyllä</a>
+          </div>
+        </div>
       </section>
     ";
   }
@@ -96,7 +104,7 @@ class BrowseController
             <input type='checkbox' name='publish-post' value='1'>
           </td>
           <td><a href='/index.php/edit-post'>Muokkaa</a></td>
-          <td><a href='#'>Poista</a></td>
+          <td><a href='#' class='delete-post-btn' onClick='openCloseDeletePostPopup($post->id)'>Poista</a></td>
           <td>$post->title</td>
           <td>$post->description</td>
           <td>$post->itemCondition</td>
