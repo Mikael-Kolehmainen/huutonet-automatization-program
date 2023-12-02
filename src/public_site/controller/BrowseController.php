@@ -56,6 +56,9 @@ class BrowseController
       <table>
         <tr>
           <td>ID</td>
+          <td>Luo ilmoitus?</td>
+          <td>Muokkaa ilmoitusta</td>
+          <td>Poista ilmoitus</td>
           <td>Otsikko</td>
           <td>Kuvaus</td>
           <td>Kunto</td>
@@ -89,6 +92,11 @@ class BrowseController
       echo "
         <tr>
           <td>$post->id</td>
+          <td>
+            <input type='checkbox' name='publish-post' value='1'>
+          </td>
+          <td><a href='/index.php/edit-post'>Muokkaa</a></td>
+          <td><a href='#'>Poista</a></td>
           <td>$post->title</td>
           <td>$post->description</td>
           <td>$post->itemCondition</td>
