@@ -52,9 +52,6 @@ class BrowseController
 
   private function showPosts(): void
   {
-    $postController = new PostController();
-    $posts = $postController->getPosts();
-
     echo "
       <table>
         <tr>
@@ -85,6 +82,9 @@ class BrowseController
         </tr>
     ";
 
+    $postController = new PostController();
+    $posts = $postController->getPosts();
+
     foreach ($posts as $post) {
       echo "
         <tr>
@@ -99,19 +99,33 @@ class BrowseController
           <td>$post->price</td>
           <td>$post->minimumRaise</td>
           <td>$post->isPriceSuggestion</td>
-          <td>$post->activeTimeBegin/td>
+          <td>$post->activeTimeBegin</td>
           <td>$post->activeTimeEnd</td>
           <td>$post->onlyToIdentifiedUsers</td>
           <td>{$post->deliveryDetails->isFetch}</td>
-          <td>Toimitus?</td>
-          <td>Toimituskulut</td>
-          <td>Toimitusehdot</td>
-          <td>Tilisiirto?</td>
-          <td>Käteinen?</td>
-          <td>Paypal?</td>
-          <td>Mobilepay?</td>
-          <td>Maksuehdot</td>
-          <td>Kuvat</td>
+          <td>{$post->deliveryDetails->isDelivery}</td>
+          <td>{$post->deliveryDetails->deliveryFee}</td>
+          <td>{$post->deliveryDetails->deliveryTerms}</td>
+          <td>{$post->paymentDetails->isBankTransfer}</td>
+          <td>{$post->paymentDetails->isCash}</td>
+          <td>{$post->paymentDetails->isPayPal}</td>
+          <td>{$post->paymentDetails->isMobilePay}</td>
+          <td>{$post->paymentDetails->paymentTerms}</td>
+      ";
+
+      if ($post->imageDetails) {
+        echo "<td class='image-container'>";
+        foreach ($post->imageDetails as $imageDetails) {
+          echo "
+            <img src='$imageDetails->imagePath'>
+          ";
+        }
+      } else {
+        echo "<td>";
+      }
+
+      echo "
+          </td>
         </tr>
       ";
     }

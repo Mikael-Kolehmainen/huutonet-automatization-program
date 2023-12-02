@@ -8,8 +8,8 @@ class PaymentModel
   private const FIELD_ID = "id";
   private const FIELD_IS_BANK_TRANSFER = "isBankTransfer";
   private const FIELD_IS_CASH = "isCash";
-  private const FIELD_IS_PAYPAL = "isPaypal";
-  private const FIELD_IS_MOBILEPAY = "isMobilepay";
+  private const FIELD_IS_PAYPAL = "isPayPal";
+  private const FIELD_IS_MOBILEPAY = "isMobilePay";
   private const FIELD_PAYMENT_TERMS = "paymentTerms";
 
   /** @var int */
@@ -22,10 +22,10 @@ class PaymentModel
   public $isCash;
 
   /** @var string */
-  public $isPaypal;
+  public $isPayPal;
 
   /** @var string */
-  public $isMobilepay;
+  public $isMobilePay;
 
   /** @var int */
   public $paymentTerms;
@@ -54,8 +54,8 @@ class PaymentModel
         [
           $this->isBankTransfer,
           $this->isCash,
-          $this->isPaypal,
-          $this->isMobilepay,
+          $this->isPayPal,
+          $this->isMobilePay,
           $this->paymentTerms
         ]
       ]
@@ -81,8 +81,8 @@ class PaymentModel
     $this->id = $record[self::FIELD_ID];
     $this->isBankTransfer = $record[self::FIELD_IS_BANK_TRANSFER];
     $this->isCash = $record[self::FIELD_IS_CASH];
-    $this->isPaypal = $record[self::FIELD_IS_PAYPAL];
-    $this->isMobilepay = $record[self::FIELD_IS_MOBILEPAY];
+    $this->isPayPal = $record[self::FIELD_IS_PAYPAL];
+    $this->isMobilePay = $record[self::FIELD_IS_MOBILEPAY];
     $this->paymentTerms = $record[self::FIELD_PAYMENT_TERMS];
 
     return $this;

@@ -48,8 +48,8 @@ class ImageModel
   public function load()
   {
     $records = $this->db->select(
-      'SELECT * FROM ' . self::TABLE_NAME,
-      []
+      'SELECT * FROM ' . self::TABLE_NAME . ' WHERE ' . self::FIELD_POST_ID . ' = ?',
+      [["s"], [$this->postId]]
     );
 
     $images = [];

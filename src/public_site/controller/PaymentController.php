@@ -24,8 +24,8 @@ class PaymentController
     $paymentModel = new PaymentModel($this->db);
     $paymentModel->isBankTransfer = ServerRequestManager::postIsBankTransfer();
     $paymentModel->isCash = ServerRequestManager::postIsCash();
-    $paymentModel->isPaypal = ServerRequestManager::postIsPaypal();
-    $paymentModel->isMobilepay = ServerRequestManager::postIsMobilepay();
+    $paymentModel->isPayPal = ServerRequestManager::postIsPaypal();
+    $paymentModel->isMobilePay = ServerRequestManager::postIsMobilepay();
     $paymentModel->paymentTerms = ServerRequestManager::postPaymentTerms();
     return $paymentModel->save();
   }

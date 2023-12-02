@@ -1,14 +1,23 @@
 table {
   display: block;
   width: 100%;
+  max-height: 400px;
   overflow-x: scroll;
   border-collapse: collapse;
 
   tr {
+    &:not(:first-child) {
+      background-color: $secondary-color;
+    }
     td {
       border: 1px solid $font-primary-color;
       padding: 0 12px;
       text-align: center;
+    }
+    .image-container {
+      display: flex;
+      padding: 12px;
+      margin: 0;
     }
   }
 }

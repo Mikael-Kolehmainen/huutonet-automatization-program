@@ -150,9 +150,16 @@ form {
 table {
   display: block;
   width: 100%;
+  max-height: 400px;
   overflow-x: scroll;
   border-collapse: collapse; }
+  table tr:not(:first-child) {
+    background-color: #2D303D; }
   table tr td {
     border: 1px solid snow;
     padding: 0 12px;
     text-align: center; }
+  table tr .image-container {
+    display: flex;
+    padding: 12px;
+    margin: 0; }
