@@ -14,13 +14,11 @@ class BrowseController
       <section>
         <h2>Ilmoitukset</h2>
         <form>
-          <table>
     ";
 
     $this->showPosts();
 
     echo "
-          </table>
           <div>
             <input type='checkbox' id='change-active-time' name='change-active-time'>
             <label for='change-active-time'>Määritä aukioloaika kaikkille valituille ilmoituksille.</label>
@@ -56,6 +54,68 @@ class BrowseController
   {
     $postController = new PostController();
     $posts = $postController->getPosts();
-    print_r($posts);
+
+    echo "
+      <table>
+        <tr>
+          <td>ID</td>
+          <td>Otsikko</td>
+          <td>Kuvaus</td>
+          <td>Kunto</td>
+          <td>Postinumero</td>
+          <td>Suomen ulkopuolella?</td>
+          <td>Osasto</td>
+          <td>Myyntitapa</td>
+          <td>Hinta</td>
+          <td>Minimikorotus</td>
+          <td>Hintaehdotukset?</td>
+          <td>Aukioloaika - alku</td>
+          <td>Aukioloaika - päättyy</td>
+          <td>Vain tunnistautuneille käyttäjille?</td>
+          <td>Nouto?</td>
+          <td>Toimitus?</td>
+          <td>Toimituskulut</td>
+          <td>Toimitusehdot</td>
+          <td>Tilisiirto?</td>
+          <td>Käteinen?</td>
+          <td>Paypal?</td>
+          <td>Mobilepay?</td>
+          <td>Maksuehdot</td>
+          <td>Kuvat</td>
+        </tr>
+    ";
+
+    foreach ($posts as $post) {
+      echo "
+        <tr>
+          <td>$post->id</td>
+          <td>$post->title</td>
+          <td>$post->description</td>
+          <td>$post->itemCondition</td>
+          <td>$post->zipCode</td>
+          <td>$post->isOutsideOfFinland</td>
+          <td>$post->category</td>
+          <td>$post->sellType</td>
+          <td>$post->price</td>
+          <td>$post->minimumRaise</td>
+          <td>$post->isPriceSuggestion</td>
+          <td>$post->activeTimeBegin/td>
+          <td>$post->activeTimeEnd</td>
+          <td>$post->onlyToIdentifiedUsers</td>
+          <td>{$post->deliveryDetails->isFetch}</td>
+          <td>Toimitus?</td>
+          <td>Toimituskulut</td>
+          <td>Toimitusehdot</td>
+          <td>Tilisiirto?</td>
+          <td>Käteinen?</td>
+          <td>Paypal?</td>
+          <td>Mobilepay?</td>
+          <td>Maksuehdot</td>
+          <td>Kuvat</td>
+        </tr>
+      ";
+    }
+
+    echo "</table>";
   }
 }

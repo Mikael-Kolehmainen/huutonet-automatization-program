@@ -146,3 +146,13 @@ form {
         transform: translate(-50%, -50%);
         margin: 0;
         white-space: nowrap; }
+
+table {
+  display: block;
+  width: 100%;
+  overflow-x: scroll;
+  border-collapse: collapse; }
+  table tr td {
+    border: 1px solid snow;
+    padding: 0 12px;
+    text-align: center; }

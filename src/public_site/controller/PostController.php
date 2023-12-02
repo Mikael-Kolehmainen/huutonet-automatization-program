@@ -97,6 +97,7 @@ class PostController
     $imageController->saveImages();
   }
 
+  /** @return mixed[] */
   public function getPosts()
   {
     $postModel = new PostModel($this->db);
@@ -110,9 +111,6 @@ class PostController
       $post->paymentDetails = $this->getPostPaymentDetails();
       $post->deliveryDetails = $this->getPostDeliveryDetails();
       $post->imageDetails = $this->getImageDetails();
-
-      unset($post->paymentId);
-      unset($post->deliveryId);
     }
 
     return $posts;
