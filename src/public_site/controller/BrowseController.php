@@ -12,6 +12,7 @@ class BrowseController
 
     echo "
       <script src='/src/public_site/js/eventListeners/deletePostPopup.js' defer></script>
+      <script src='/src/public_site/js/eventListeners/changeActiveTime.js' defer></script>
       <section>
         <h2>Ilmoitukset</h2>
         <form>
@@ -24,7 +25,7 @@ class BrowseController
             <input type='checkbox' id='change-active-time' name='change-active-time'>
             <label for='change-active-time'>Määritä aukioloaika kaikkille valituille ilmoituksille.</label>
           </div>
-          <div id='active-time-changers'>
+          <div id='active-time-changers' style='display: none;'>
             <label for='active-time-start'>Aukioloaika - alku</label>
             <input type='date' name='active-time-start'>
             <label for='active-time-end'>Aukioloaika - päättyy</label>

@@ -15,7 +15,7 @@ TODO:
   - Frontend - COMPLETE
     - Display posts from database. - COMPLETE
   - Backend
-    - Delete post
+    - Delete post - COMPLETE
     - Change dates for multiple posts
     - Create posts on Huutonet with API
 - Edit post page
