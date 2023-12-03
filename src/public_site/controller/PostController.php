@@ -138,6 +138,21 @@ class PostController
     return $imageController->getImages();
   }
 
+  /** @return mixed */
+  public function getPostWithUriId()
+  {
+    $this->postId = ServerRequestManager::getUriParts()[3];
+    $postModel = new PostModel($this->db);
+    $postModel->id = $this->postId;
+    $post = $postModel->load();
+    $this->deliveryId = $post->deliveryId;
+    $this->paymentId = $post->paymentId;
+    $post->paymentDetails = $this->getPostPaymentDetails();
+    $post->deliveryDetails = $this->getPostDeliveryDetails();
+    $post->imageDetails = $this->getImageDetails();
+    return $post;
+  }
+
   private function getPostRelatedIds()
   {
     $postModel = new PostModel($this->db);

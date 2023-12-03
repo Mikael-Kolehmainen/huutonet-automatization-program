@@ -1,5 +1,6 @@
 <?php
 
+use public_site\controller\EditController;
 use public_site\controller\ErrorController;
 use public_site\controller\HomeController;
 use public_site\controller\BrowseController;
@@ -36,6 +37,7 @@ switch ($uri[2]) {
 		showBrowse();
 		break;
   case "edit-post":
+    showEdit();
     break;
   case "post":
     switch ($uri[3]) {
@@ -91,6 +93,12 @@ function showBrowse(): void
 {
 	$browseController = new BrowseController();
 	$browseController->showBrowsePage();
+}
+
+function showEdit(): void
+{
+  $editController = new EditController();
+  $editController->showEditPage();
 }
 
 function savePost(): void

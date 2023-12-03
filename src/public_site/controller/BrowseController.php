@@ -104,7 +104,7 @@ class BrowseController
           <td>
             <input type='checkbox' name='publish-post' value='1'>
           </td>
-          <td><a href='/index.php/edit-post'>Muokkaa</a></td>
+          <td><a href='/index.php/edit-post/$post->id'>Muokkaa</a></td>
           <td><a href='#' class='delete-post-btn' onClick='openCloseDeletePostPopup($post->id)'>Poista</a></td>
           <td>$post->title</td>
           <td>$post->description</td>
