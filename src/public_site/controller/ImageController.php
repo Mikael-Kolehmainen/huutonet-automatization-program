@@ -46,4 +46,11 @@ class ImageController
     $imageModel->postId = $this->postId;
     return $imageModel->load();
   }
+
+  public function deleteImage(): void
+  {
+    $imageModel = new ImageModel($this->db);
+    $imageModel->postId = $this->postId;
+    $imageModel->delete();
+  }
 }

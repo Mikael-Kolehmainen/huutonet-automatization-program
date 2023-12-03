@@ -36,4 +36,11 @@ class PaymentController
     $paymentModel->id = $this->paymentId;
     return $paymentModel->load();
   }
+
+  public function deletePayment(): void
+  {
+    $paymentModel = new PaymentModel($this->db);
+    $paymentModel->id = $this->paymentId;
+    $paymentModel->delete();
+  }
 }

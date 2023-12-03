@@ -122,6 +122,14 @@ class PostModel
      );
   }
 
+  public function delete()
+  {
+    $this->db->remove(
+      'DELETE FROM ' . self::TABLE_NAME . ' WHERE ' . self::FIELD_ID . ' = ?',
+      [["s"], [$this->id]]
+    );
+  }
+
   /** @return PostModel[] */
   public function loadAll()
   {
@@ -140,6 +148,17 @@ class PostModel
     }
 
     return $posts;
+  }
+
+  /** @return PostModel */
+  public function load()
+  {
+    $records = $this->db->select(
+      'SELECT * FROM ' . self::TABLE_NAME . ' WHERE ' . self::FIELD_ID . ' = ?',
+      [["s"], [$this->id]]
+    );
+    $record = array_pop($records);
+    return $this->mapFromDbRecord($record);
   }
 
   /**

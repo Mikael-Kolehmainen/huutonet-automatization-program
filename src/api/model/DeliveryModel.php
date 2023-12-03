@@ -56,6 +56,14 @@ class DeliveryModel
      );
   }
 
+  public function delete()
+  {
+    $this->db->remove(
+      'DELETE FROM ' . self::TABLE_NAME . ' WHERE ' . self::FIELD_ID . ' = ?',
+      [["s"], [$this->id]]
+    );
+  }
+
   public function load(): DeliveryModel
   {
     $records = $this->db->select(

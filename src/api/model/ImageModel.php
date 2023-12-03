@@ -44,6 +44,14 @@ class ImageModel
     );
   }
 
+  public function delete()
+  {
+    $this->db->remove(
+      'DELETE FROM ' . self::TABLE_NAME . ' WHERE ' . self::FIELD_POST_ID . ' = ?',
+      [["s"], [$this->postId]]
+    );
+  }
+
   /** @return ImageModel[] */
   public function load()
   {

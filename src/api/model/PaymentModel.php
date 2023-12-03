@@ -62,6 +62,14 @@ class PaymentModel
     );
   }
 
+  public function delete()
+  {
+    $this->db->remove(
+      'DELETE FROM ' . self::TABLE_NAME . ' WHERE ' . self::FIELD_ID . ' = ?',
+      [["s"], [$this->id]]
+    );
+  }
+
   public function load(): PaymentModel
   {
     $records = $this->db->select(

@@ -35,4 +35,11 @@ class DeliveryController
     $deliveryModel->id = $this->deliveryId;
     return $deliveryModel->load();
   }
+
+  public function deleteDelivery(): void
+  {
+    $deliveryModel = new DeliveryModel($this->db);
+    $deliveryModel->id = $this->deliveryId;
+    $deliveryModel->delete();
+  }
 }

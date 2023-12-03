@@ -49,6 +49,9 @@ switch ($uri[2]) {
       case "update":
         break;
       case "delete":
+        if ($uri[4]) {
+          deletePost();
+        }
         break;
       case "upload":
         break;
@@ -94,6 +97,12 @@ function savePost(): void
 {
   $postController = new PostController();
   $postController->savePost();
+}
+
+function deletePost(): void
+{
+  $postController = new PostController();
+  $postController->deletePost();
 }
 
 /**

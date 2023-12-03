@@ -6,6 +6,7 @@ use api\manager\RedirectManager;
 use api\manager\ServerRequestManager;
 use api\model\Database;
 use api\model\PostModel;
+use stdClass;
 
 class PostController
 {
@@ -135,5 +136,60 @@ class PostController
     $imageController = new ImageController();
     $imageController->postId = $this->postId;
     return $imageController->getImages();
+  }
+
+  private function getPostRelatedIds()
+  {
+    $postModel = new PostModel($this->db);
+    $postModel->id = $this->postId;
+    $post = $postModel->load();
+
+    $postRelatedIds = new stdClass();
+    $postRelatedIds->postId = $post->id;
+    $postRelatedIds->paymentId = $post->paymentId;
+    $postRelatedIds->deliveryId = $post->deliveryId;
+    return $postRelatedIds;
+  }
+
+  public function deletePost(): void
+  {
+    $this->postId = ServerRequestManager::getUriParts()[4];
+    $postRelatedIds = $this->getPostRelatedIds();
+    $this->paymentId = $postRelatedIds->paymentId;
+    $this->deliveryId = $postRelatedIds->deliveryId;
+
+    $this->deletePostImageDetails();
+    $this->deletePostDetails();
+    $this->deletePostPaymentDetails();
+    $this->deletePostDeliveryDetails();
+    RedirectManager::redirectToBrowsePosts();
+  }
+
+  private function deletePostPaymentDetails(): void
+  {
+    $paymentController = new PaymentController();
+    $paymentController->paymentId = $this->paymentId;
+    $paymentController->deletePayment();
+  }
+
+  private function deletePostDeliveryDetails(): void
+  {
+    $deliveryController = new DeliveryController();
+    $deliveryController->deliveryId = $this->deliveryId;
+    $deliveryController->deleteDelivery();
+  }
+
+  private function deletePostDetails(): void
+  {
+    $postModel = new PostModel($this->db);
+    $postModel->id = $this->postId;
+    $postModel->delete();
+  }
+
+  private function deletePostImageDetails(): void
+  {
+    $imageController = new ImageController();
+    $imageController->postId = $this->postId;
+    $imageController->deleteImage();
   }
 }
