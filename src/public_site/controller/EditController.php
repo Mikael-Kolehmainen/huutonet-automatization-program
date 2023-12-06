@@ -15,6 +15,8 @@ class EditController
     $this->showHeader();
     $this->getPost();
 
+    print_r($this->post);
+
     echo "
         <title>Muokkaa ilmoitusta</title>
         <script src='/src/public_site/js/eventListeners/isOutsideOfFinland.js' defer></script>
@@ -35,17 +37,9 @@ class EditController
             </label>
           </div>
           <p>Kunto:</p>
-          <div class='radio-group'>
-            <input type='radio' id='new' value='new' name='item-condition'>
-            <label for='new'>Uusi</label>
-            <input type='radio' id='like-new' value='like-new' name='item-condition'>
-            <label for='like-new'>Uudenveroinen</label>
-            <input type='radio' id='good' value='good' name='item-condition' checked>
-            <label for='good'>Hyvä</label>
-            <input type='radio' id='acceptable' value='acceptable' name='item-condition'>
-            <label for='acceptable'>Tyydyttävä</label>
-            <input type='radio' id='weak' value='weak' name='item-condition'>
-            <label for='weak'>Heikko</label>
+          <div class='radio-group'>";
+          $this->showItemConditionRadioButtons();
+    echo "
           </div>
           <div class='input-with-checkbox'>
             <input type='text' placeholder='Postinumero' id='zip-code' name='zip-code' value='{$this->post->zipCode}'>
@@ -119,12 +113,22 @@ class EditController
     $this->post = $postController->getPostWithUriId();
   }
 
+  private function showItemConditionRadioButtons(): void
+  {
+    $itemConditions = ["new", "like-new", "good", "acceptable", "weak"];
+    $itemConditionsLabels = ["Uusi", "Uudenveroinen", "Hyvä", "Tyydyttävä", "Heikko"];
+    foreach ($itemConditions as $key => $itemCondition) {
+      $checked = $this->isChecked($this->post->itemCondition === $itemCondition);
+      echo "
+        <input type='radio' id='$itemCondition' value='$itemCondition' name='item-condition' $checked>
+        <label for='$itemCondition'>$itemConditionsLabels[$key]</label>
+      ";
+    }
+  }
+
   private function isChecked($condition): string
   {
-    if ($condition) {
-      return "checked";
-    }
-    return "";
+    return $condition ? "checked" : "";
   }
 
   private function showCategoriesDropdowns(): void
