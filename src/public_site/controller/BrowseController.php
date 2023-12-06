@@ -15,14 +15,14 @@ class BrowseController
       <script src='/src/public_site/js/eventListeners/changeActiveTime.js' defer></script>
       <section>
         <h2>Ilmoitukset</h2>
-        <form>
+        <form action='/index.php/post/upload' method='POST'>
     ";
 
     $this->showPosts();
 
     echo "
           <div>
-            <input type='checkbox' id='change-active-time' name='change-active-time'>
+            <input type='checkbox' id='change-active-time' value='1' name='change-active-time'>
             <label for='change-active-time'>Määritä aukioloaika kaikkille valituille ilmoituksille.</label>
           </div>
           <div id='active-time-changers' style='display: none;'>
@@ -39,7 +39,7 @@ class BrowseController
           <input type='text' name='huutonet-username' placeholder='Huutonet käyttäjänimi' required>
           <input type='password' name='huutonet-password' placeholder='Huutonet salasana' required>
           <div class='btn-container'>
-            <input type='submit' class='btn' value='Luo valittut ilmoitukset Huutonet:iin'>
+            <input type='submit' class='btn' name='upload-post' value='Luo valittut ilmoitukset Huutonet:iin'>
           </div>
         </form>
         <div class='popup' id='delete-post-popup' style='display: none;'>
@@ -102,7 +102,7 @@ class BrowseController
         <tr>
           <td>$post->id</td>
           <td>
-            <input type='checkbox' name='publish-post' value='1'>
+            <input type='checkbox' name='selected-posts[]' value='$post->id'>
           </td>
           <td><a href='/index.php/edit-post/$post->id'>Muokkaa</a></td>
           <td><a href='#' class='delete-post-btn' onClick='openCloseDeletePostPopup($post->id)'>Poista</a></td>

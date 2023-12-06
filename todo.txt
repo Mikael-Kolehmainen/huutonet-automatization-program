@@ -28,3 +28,6 @@ TODO:
       - Category - COMPLETE
   - Backend - COMPLETE
     - Update post - COMPLETE
+- Success page (go here after posts have been uploaded to Huutonet)
+  - Frontend
+    - Display Huutonet links to created posts

@@ -57,6 +57,9 @@ switch ($uri[2]) {
         }
         break;
       case "upload":
+        if (ServerRequestManager::issetUploadPost()) {
+          uploadPost();
+        }
         break;
     }
   case "error":
@@ -118,6 +121,12 @@ function deletePost(): void
 {
   $postController = new PostController();
   $postController->deletePost();
+}
+
+function uploadPost(): void
+{
+  $postController = new PostController();
+  $postController->uploadPost();
 }
 
 /**

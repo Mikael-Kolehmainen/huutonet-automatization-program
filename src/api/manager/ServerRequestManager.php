@@ -10,6 +10,7 @@ class ServerRequestManager
   private const REQUEST_URI = "REQUEST_URI";
   private const CREATE_POST = "create-post";
   private const EDIT_POST = "edit-post";
+  private const UPLOAD_POST = "upload-post";
   private const IS_BANK_TRANSFER = "is-bank-transfer";
   private const IS_CASH = "is-cash";
   private const IS_PAYPAL = "is-paypal";
@@ -32,6 +33,10 @@ class ServerRequestManager
   private const ACTIVE_TIME_END = "active-time-end";
   private const ONLY_TO_IDENTIFIED_USERS = "only-to-identified-users";
   private const POST_IMAGE = "post-images";
+  private const SELECTED_POSTS = "selected-posts";
+  private const CHANGE_ACTIVE_TIME = "change-active-time";
+  private const HUUTONET_USERNAME = "huutonet-username";
+  private const HUUTONET_PASSWORD = "huutonet-password";
 
   public static function isPost(): bool
   {
@@ -58,6 +63,11 @@ class ServerRequestManager
   public static function issetEditPost(): bool
   {
     return isset($_POST[self::EDIT_POST]);
+  }
+
+  public static function issetUploadPost(): bool
+  {
+    return isset($_POST[self::UPLOAD_POST]);
   }
 
   public static function postIsBankTransfer(): string
@@ -163,6 +173,26 @@ class ServerRequestManager
   public static function postOnlyToIdentifiedUsers(): string
   {
     return $_POST[self::ONLY_TO_IDENTIFIED_USERS] ? $_POST[self::ONLY_TO_IDENTIFIED_USERS] : "0";
+  }
+
+  public static function postSelectedPosts(): array
+  {
+    return $_POST[self::SELECTED_POSTS];
+  }
+
+  public static function postChangeActiveTime(): string
+  {
+    return $_POST[self::CHANGE_ACTIVE_TIME];
+  }
+
+  public static function postHuutonetUsername(): string
+  {
+    return $_POST[self::HUUTONET_USERNAME];
+  }
+
+  public static function postHuutonetPassword(): string
+  {
+    return $_POST[self::HUUTONET_PASSWORD];
   }
 
   public static function filesImages(): array
