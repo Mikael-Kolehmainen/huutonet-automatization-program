@@ -9,6 +9,7 @@ class ServerRequestManager
   private const GET = "GET";
   private const REQUEST_URI = "REQUEST_URI";
   private const CREATE_POST = "create-post";
+  private const EDIT_POST = "edit-post";
   private const IS_BANK_TRANSFER = "is-bank-transfer";
   private const IS_CASH = "is-cash";
   private const IS_PAYPAL = "is-paypal";
@@ -52,6 +53,11 @@ class ServerRequestManager
   public static function issetCreatePost(): bool
   {
     return isset($_POST[self::CREATE_POST]);
+  }
+
+  public static function issetEditPost(): bool
+  {
+    return isset($_POST[self::EDIT_POST]);
   }
 
   public static function postIsBankTransfer(): string

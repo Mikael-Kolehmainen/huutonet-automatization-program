@@ -62,6 +62,30 @@ class PaymentModel
     );
   }
 
+  public function update()
+  {
+    $this->db->insert(
+      'UPDATE ' . self::TABLE_NAME .
+      ' SET ' . self::FIELD_IS_BANK_TRANSFER . ' = ?,' .
+      self::FIELD_IS_CASH . ' = ?,' .
+      self::FIELD_IS_PAYPAL . ' = ?,' .
+      self::FIELD_IS_MOBILEPAY . ' = ?,' .
+      self::FIELD_PAYMENT_TERMS . ' = ?' .
+      ' WHERE ' . self::FIELD_ID . ' = ?',
+      [
+        ['iiiisi'],
+        [
+          $this->isBankTransfer,
+          $this->isCash,
+          $this->isPayPal,
+          $this->isMobilePay,
+          $this->paymentTerms,
+          $this->id
+        ]
+      ]
+    );
+  }
+
   public function delete()
   {
     $this->db->remove(

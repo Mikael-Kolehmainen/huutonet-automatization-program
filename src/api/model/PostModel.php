@@ -122,7 +122,51 @@ class PostModel
      );
   }
 
-  public function delete()
+  public function update(): void
+  {
+    $this->db->insert(
+      'UPDATE ' . self::TABLE_NAME .
+      ' SET ' . self::FIELD_TITLE . ' = ?,' .
+      self::FIELD_DESCRIPTION . ' = ?,' .
+      self::FIELD_ITEM_CONDITION . ' = ?,' .
+      self::FIELD_ZIP_CODE . ' = ?,' .
+      self::FIELD_IS_OUTSIDE_OF_FINLAND . ' = ?,' .
+      self::FIELD_CATEGORY . ' = ?,' .
+      self::FIELD_SELL_TYPE . ' = ?,' .
+      self::FIELD_PRICE . ' = ?,' .
+      self::FIELD_MINIMUM_RAISE . ' = ?,' .
+      self::FIELD_IS_PRICE_SUGGESTION . ' = ?,' .
+      self::FIELD_DELIVERY_ID . ' = ?,' .
+      self::FIELD_PAYMENT_ID . ' = ?,' .
+      self::FIELD_ACTIVE_TIME_BEGIN . ' = ?,' .
+      self::FIELD_ACTIVE_TIME_END . ' = ?,' .
+      self::FIELD_ONLY_TO_IDENTIFIED_USERS . ' = ?' .
+      ' WHERE ' . self::FIELD_ID . ' = ?',
+      [
+        ['ssssissddiiissii'],
+        [
+          $this->title,
+          $this->description,
+          $this->itemCondition,
+          $this->zipCode,
+          $this->isOutsideOfFinland,
+          $this->category,
+          $this->sellType,
+          $this->price,
+          $this->minimumRaise,
+          $this->isPriceSuggestion,
+          $this->deliveryId,
+          $this->paymentId,
+          $this->activeTimeBegin,
+          $this->activeTimeEnd,
+          $this->onlyToIdentifiedUsers,
+          $this->id
+        ]
+      ]
+    );
+  }
+
+  public function delete(): void
   {
     $this->db->remove(
       'DELETE FROM ' . self::TABLE_NAME . ' WHERE ' . self::FIELD_ID . ' = ?',

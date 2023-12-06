@@ -47,6 +47,17 @@ class ImageController
     return $imageModel->load();
   }
 
+  public function updateImages(): void
+  {
+    $imageFiles = ServerRequestManager::filesImages();
+    if (!$imageFiles || count($imageFiles) == 0 || $imageFiles["name"][0] == "") {
+      return;
+    }
+
+    $this->deleteImage();
+    $this->saveImages();
+  }
+
   public function deleteImage(): void
   {
     $imageModel = new ImageModel($this->db);

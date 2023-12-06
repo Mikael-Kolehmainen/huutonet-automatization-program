@@ -36,6 +36,17 @@ class DeliveryController
     return $deliveryModel->load();
   }
 
+  public function updateDelivery(): void
+  {
+    $deliveryModel = new DeliveryModel($this->db);
+    $deliveryModel->isFetch = ServerRequestManager::postIsFetch();
+    $deliveryModel->isDelivery = ServerRequestManager::postIsDelivery();
+    $deliveryModel->deliveryFee = ServerRequestManager::postDeliveryFee();
+    $deliveryModel->deliveryTerms = ServerRequestManager::postDeliveryTerms();
+    $deliveryModel->id = $this->deliveryId;
+    $deliveryModel->update();
+  }
+
   public function deleteDelivery(): void
   {
     $deliveryModel = new DeliveryModel($this->db);

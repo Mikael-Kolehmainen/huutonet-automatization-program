@@ -15,8 +15,6 @@ class EditController
     $this->showHeader();
     $this->getPost();
 
-    print_r($this->post);
-
     echo "
         <title>Muokkaa ilmoitusta</title>
         <script src='/src/public_site/js/eventListeners/isOutsideOfFinland.js' defer></script>
@@ -27,7 +25,7 @@ class EditController
       </head>
       <section>
         <h2>Muokkaa ilmoitusta</h2>
-        <form action='/index.php/post/insert' method='POST' enctype='multipart/form-data'>
+        <form action='/index.php/post/update/{$this->post->id}' method='POST' enctype='multipart/form-data'>
           <input type='text' placeholder='Otsikko' name='title' value='{$this->post->title}' required>
           <textarea placeholder='Kuvaus' name='description' required>{$this->post->description}</textarea>
           <div class='image-container' id='post-image-container'>
@@ -94,7 +92,7 @@ class EditController
             <label for='only-to-identified-users'>Myyn vain tunnistautuneille käyttäjille</label>
           </div>
           <div class='btn-container'>
-            <input type='submit' class='btn' name='create-post' value='Luo ilmoitus tietokantaan'>
+            <input type='submit' class='btn' name='edit-post' value='Päivitä ilmoitus tietokannassa'>
           </div>
         </form>
       </section>

@@ -18,13 +18,13 @@ TODO:
     - Delete post - COMPLETE
     - Change dates for multiple posts
     - Create posts on Huutonet with API
-- Edit post page
-  - Frontend
+- Edit post page - COMPLETE
+  - Frontend - COMPLETE
     - Show current values and then inputs for changing them. - COMPLETE
       - Radio buttons - COMPLETE
       - Images - COMPLETE
       - activeTimeBegin date - COMPLETE
       - If checkbox conditions are true then the inputs should be shown for them. - COMPLETE
       - Category - COMPLETE
-  - Backend
-    - Update post
+  - Backend - COMPLETE
+    - Update post - COMPLETE

@@ -41,14 +41,15 @@ switch ($uri[2]) {
     break;
   case "post":
     switch ($uri[3]) {
-      case "select":
-        break;
       case "insert":
         if (ServerRequestManager::issetCreatePost()) {
           savePost();
         }
         break;
       case "update":
+        if (ServerRequestManager::issetEditPost() && $uri[4]) {
+          updatePost();
+        }
         break;
       case "delete":
         if ($uri[4]) {
@@ -105,6 +106,12 @@ function savePost(): void
 {
   $postController = new PostController();
   $postController->savePost();
+}
+
+function updatePost(): void
+{
+  $postController = new PostController();
+  $postController->updatePost();
 }
 
 function deletePost(): void

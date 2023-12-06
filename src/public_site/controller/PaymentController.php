@@ -37,6 +37,18 @@ class PaymentController
     return $paymentModel->load();
   }
 
+  public function updatePayment(): void
+  {
+    $paymentModel = new PaymentModel($this->db);
+    $paymentModel->isBankTransfer = ServerRequestManager::postIsBankTransfer();
+    $paymentModel->isCash = ServerRequestManager::postIsCash();
+    $paymentModel->isPayPal = ServerRequestManager::postIsPaypal();
+    $paymentModel->isMobilePay = ServerRequestManager::postIsMobilepay();
+    $paymentModel->paymentTerms = ServerRequestManager::postPaymentTerms();
+    $paymentModel->id = $this->paymentId;
+    $paymentModel->update();
+  }
+
   public function deletePayment(): void
   {
     $paymentModel = new PaymentModel($this->db);

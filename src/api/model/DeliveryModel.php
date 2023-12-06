@@ -56,7 +56,29 @@ class DeliveryModel
      );
   }
 
-  public function delete()
+  public function update(): void
+  {
+    $this->db->insert(
+      'UPDATE ' . self::TABLE_NAME .
+      ' SET ' . self::FIELD_IS_FETCH . ' = ?,' .
+      self::FIELD_IS_DELIVERY . ' = ?,' .
+      self::FIELD_DELIVERY_FEE . ' = ?,' .
+      self::FIELD_DELIVERY_TERMS . ' = ?' .
+      ' WHERE ' . self::FIELD_ID . ' = ?',
+      [
+        ['iissi'],
+        [
+          $this->isFetch,
+          $this->isDelivery,
+          $this->deliveryFee,
+          $this->deliveryTerms,
+          $this->id
+        ]
+      ]
+    );
+  }
+
+  public function delete(): void
   {
     $this->db->remove(
       'DELETE FROM ' . self::TABLE_NAME . ' WHERE ' . self::FIELD_ID . ' = ?',

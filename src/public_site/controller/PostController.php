@@ -32,7 +32,7 @@ class PostController
     $this->paymentId = $this->savePostPaymentDetails();
     $this->deliveryId = $this->savePostDeliveryDetails();
     $this->postId = $this->savePostDetails();
-    $this->saveImageDetails();
+    $this->savePostImageDetails();
     RedirectManager::redirectToNewPost();
   }
 
@@ -91,7 +91,7 @@ class PostController
     return date('y-m-d', strtotime(ServerRequestManager::postActiveTimeBegin() . " + $activeTimeEndDays days"));
   }
 
-  private function saveImageDetails(): void
+  private function savePostImageDetails(): void
   {
     $imageController = new ImageController();
     $imageController->postId = $this->postId;
@@ -153,17 +153,61 @@ class PostController
     return $post;
   }
 
-  private function getPostRelatedIds()
+  public function updatePost(): void
+  {
+    $this->postId = ServerRequestManager::getUriParts()[4];
+    $postRelatedIds = $this->getPostRelatedIds();
+    $this->paymentId = $postRelatedIds->paymentId;
+    $this->deliveryId = $postRelatedIds->deliveryId;
+
+    $this->updatePostPaymentDetails();
+    $this->updatePostDeliveryDetails();
+    $this->updatePostDetails();
+    $this->updatePostImageDetails();
+    RedirectManager::redirectToBrowsePosts();
+  }
+
+  private function updatePostPaymentDetails(): void
+  {
+    $paymentController = new PaymentController();
+    $paymentController->paymentId = $this->paymentId;
+    $paymentController->updatePayment();
+  }
+
+  private function updatePostDeliveryDetails(): void
+  {
+    $deliveryController = new DeliveryController();
+    $deliveryController->deliveryId = $this->deliveryId;
+    $deliveryController->updateDelivery();
+  }
+
+  private function updatePostDetails(): void
   {
     $postModel = new PostModel($this->db);
+    $postModel->title = ServerRequestManager::postTitle();
+    $postModel->description = ServerRequestManager::postDescription();
+    $postModel->itemCondition = ServerRequestManager::postItemCondition();
+    $postModel->zipCode = ServerRequestManager::postZipCode();
+    $postModel->isOutsideOfFinland = ServerRequestManager::postIsOutsideOfFinland();
+    $postModel->category = ServerRequestManager::postCategory();
+    $postModel->sellType = ServerRequestManager::postSellType();
+    $postModel->price = ServerRequestManager::postPrice();
+    $postModel->minimumRaise = $this->getMinimumRaise();
+    $postModel->isPriceSuggestion = ServerRequestManager::postIsPriceSuggestion();
+    $postModel->deliveryId = $this->deliveryId;
+    $postModel->paymentId = $this->paymentId;
+    $postModel->activeTimeBegin = ServerRequestManager::postActiveTimeBegin();
+    $postModel->activeTimeEnd = $this->getActiveTimeEnd();
+    $postModel->onlyToIdentifiedUsers = ServerRequestManager::postOnlyToIdentifiedUsers();
     $postModel->id = $this->postId;
-    $post = $postModel->load();
+    $postModel->update();
+  }
 
-    $postRelatedIds = new stdClass();
-    $postRelatedIds->postId = $post->id;
-    $postRelatedIds->paymentId = $post->paymentId;
-    $postRelatedIds->deliveryId = $post->deliveryId;
-    return $postRelatedIds;
+  private function updatePostImageDetails(): void
+  {
+    $imageController = new ImageController();
+    $imageController->postId = $this->postId;
+    $imageController->updateImages();
   }
 
   public function deletePost(): void
@@ -178,6 +222,19 @@ class PostController
     $this->deletePostPaymentDetails();
     $this->deletePostDeliveryDetails();
     RedirectManager::redirectToBrowsePosts();
+  }
+
+  private function getPostRelatedIds()
+  {
+    $postModel = new PostModel($this->db);
+    $postModel->id = $this->postId;
+    $post = $postModel->load();
+
+    $postRelatedIds = new stdClass();
+    $postRelatedIds->postId = $post->id;
+    $postRelatedIds->paymentId = $post->paymentId;
+    $postRelatedIds->deliveryId = $post->deliveryId;
+    return $postRelatedIds;
   }
 
   private function deletePostPaymentDetails(): void
