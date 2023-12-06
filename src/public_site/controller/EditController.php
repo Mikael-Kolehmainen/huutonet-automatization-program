@@ -132,6 +132,7 @@ class EditController
   private function showCategoriesDropdowns(): void
   {
     $categoryController = new CategoryController();
+    $categoryController->selectedCategory = $this->post->category;
     $categoryController->showCategories();
   }
 

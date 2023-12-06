@@ -25,6 +25,6 @@ TODO:
       - Images
       - activeTimeBegin date
       - If checkbox conditions are true then the inputs should be shown for them.
-      - Category
+      - Category - COMPLETE
   - Backend
     - Update post

@@ -7,13 +7,17 @@ use api\manager\HuutonetManager;
 
 class CategoryController
 {
+  /** @var string */
+  public $selectedCategory;
+
   public function showCategories(): void
   {
     $categories = $this->getCategories();
 
     echo "<select id='category' name='category' required>";
     foreach ($categories as $category) {
-      echo "<option value='$category[id]'>$category[title]</option>";
+      $selected = $this->isSelected($category["id"]);
+      echo "<option value='$category[id]' $selected>$category[title]</option>";
     }
     echo "</select>";
   }
@@ -22,5 +26,10 @@ class CategoryController
   {
     $huutonetManager = new HuutonetManager();
     return $huutonetManager->fetchCategories();
+  }
+
+  private function isSelected($categoryId): string
+  {
+    return $this->selectedCategory == $categoryId ? "selected" : "";
   }
 }
