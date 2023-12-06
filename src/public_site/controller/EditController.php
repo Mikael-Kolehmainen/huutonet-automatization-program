@@ -34,7 +34,9 @@ class EditController
             <label class='image-file-input' id='post-image-selector'>
               <input type='file' name='post-images[]' id='post-image' accept='png/jpg/jpeg/gif' multiple>
               <p id='file-input-text'>Lisää kuva</p>
-            </label>
+            </label>";
+          $this->showPostImages();
+    echo "
           </div>
           <p>Kunto:</p>
           <div class='radio-group'>";
@@ -109,6 +111,13 @@ class EditController
   {
     $postController = new PostController();
     $this->post = $postController->getPostWithUriId();
+  }
+
+  private function showPostImages(): void
+  {
+    foreach ($this->post->imageDetails as $postImage) {
+      echo "<img src='$postImage->imagePath'>";
+    }
   }
 
   private function showItemConditionRadioButtons(): void

@@ -22,7 +22,7 @@ TODO:
   - Frontend
     - Show current values and then inputs for changing them.
       - Radio buttons - COMPLETE
-      - Images
+      - Images - COMPLETE
       - activeTimeBegin date - COMPLETE
       - If checkbox conditions are true then the inputs should be shown for them.
       - Category - COMPLETE
