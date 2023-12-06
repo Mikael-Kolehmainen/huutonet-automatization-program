@@ -49,11 +49,9 @@ class EditController
           $this->showCategoriesDropdowns();
     echo "
           <p>Myyntitapa:</p>
-          <div class='radio-group'>
-            <input type='radio' id='buy-now' value='buy-now' name='sell-type' required checked>
-            <label for='buy-now'>Osta heti</label>
-            <input type='radio' id='auction' value='auction' name='sell-type' required>
-            <label for='auction'>Huutokauppa</label>
+          <div class='radio-group'>";
+          $this->showSellTypeRadioButtons();
+    echo "
           </div>
           <div class='input-with-checkbox'>
             <input type='number' placeholder='Hinta' id='price' name='price' step='.01' value='{$this->post->price}' required>
@@ -120,7 +118,7 @@ class EditController
     foreach ($itemConditions as $key => $itemCondition) {
       $checked = $this->isChecked($this->post->itemCondition === $itemCondition);
       echo "
-        <input type='radio' id='$itemCondition' value='$itemCondition' name='item-condition' $checked>
+        <input type='radio' id='$itemCondition' value='$itemCondition' name='item-condition' required $checked>
         <label for='$itemCondition'>$itemConditionsLabels[$key]</label>
       ";
     }
@@ -135,5 +133,18 @@ class EditController
   {
     $categoryController = new CategoryController();
     $categoryController->showCategories();
+  }
+
+  private function showSellTypeRadioButtons(): void
+  {
+    $sellTypes = ["buy-now", "auction"];
+    $sellTypesLabels = ["Osta heti", "Huutokauppa"];
+    foreach ($sellTypes as $key => $sellType) {
+      $checked = $this->isChecked($this->post->sellType === $sellType);
+      echo "
+        <input type='radio' id='$sellType' value='$sellType' name='sell-type' required $checked>
+        <label for='$sellType'>$sellTypesLabels[$key]</label>
+      ";
+    }
   }
 }

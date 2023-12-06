@@ -32,15 +32,15 @@ class NewController
           </div>
           <p>Kunto:</p>
           <div class='radio-group'>
-            <input type='radio' id='new' value='new' name='item-condition'>
+            <input type='radio' id='new' value='new' name='item-condition' required>
             <label for='new'>Uusi</label>
-            <input type='radio' id='like-new' value='like-new' name='item-condition'>
+            <input type='radio' id='like-new' value='like-new' name='item-condition' required>
             <label for='like-new'>Uudenveroinen</label>
-            <input type='radio' id='good' value='good' name='item-condition' checked>
+            <input type='radio' id='good' value='good' name='item-condition' required checked>
             <label for='good'>Hyvä</label>
-            <input type='radio' id='acceptable' value='acceptable' name='item-condition'>
+            <input type='radio' id='acceptable' value='acceptable' name='item-condition' required>
             <label for='acceptable'>Tyydyttävä</label>
-            <input type='radio' id='weak' value='weak' name='item-condition'>
+            <input type='radio' id='weak' value='weak' name='item-condition' required>
             <label for='weak'>Heikko</label>
           </div>
           <div class='input-with-checkbox'>
