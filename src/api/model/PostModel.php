@@ -180,10 +180,16 @@ class PostModel
     $this->isPriceSuggestion = $record[self::FIELD_IS_PRICE_SUGGESTION];
     $this->deliveryId = $record[self::FIELD_DELIVERY_ID];
     $this->paymentId = $record[self::FIELD_PAYMENT_ID];
-    $this->activeTimeBegin = $record[self::FIELD_ACTIVE_TIME_BEGIN];
-    $this->activeTimeEnd = $record[self::FIELD_ACTIVE_TIME_END];
+    $this->activeTimeBegin = $this->formatDate($record[self::FIELD_ACTIVE_TIME_BEGIN]);
+    $this->activeTimeEnd = $this->formatDate($record[self::FIELD_ACTIVE_TIME_END]);
     $this->onlyToIdentifiedUsers = $record[self::FIELD_ONLY_TO_IDENTIFIED_USERS];
 
     return $this;
+  }
+
+  private function formatDate($dateTimeStr): string
+  {
+    $dateTime = new \DateTime($dateTimeStr);
+    return $dateTime->format("Y-m-d");
   }
 }
