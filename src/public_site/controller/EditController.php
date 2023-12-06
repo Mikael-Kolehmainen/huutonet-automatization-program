@@ -44,7 +44,7 @@ class EditController
     echo "
           </div>
           <div class='input-with-checkbox'>
-            <input type='text' placeholder='Postinumero' id='zip-code' name='zip-code' value='{$this->post->zipCode}'>
+            <input type='text' placeholder='Postinumero' id='zip-code' name='zip-code' value='{$this->post->zipCode}' style='display: {$this->isVisible(!$this->post->isOutsideOfFinland)}'>
             <input type='checkbox' id='is-outside-of-finland' value='1' name='is-outside-of-finland' {$this->isChecked($this->post->isOutsideOfFinland)}>
             <label for='is-outside-of-finland'>Tuote sijaitsee Suomen ulkopuolella</label>
           </div>";
@@ -57,7 +57,7 @@ class EditController
           </div>
           <div class='input-with-checkbox'>
             <input type='number' placeholder='Hinta' id='price' name='price' step='.01' value='{$this->post->price}' required>
-            <input type='number' placeholder='Minimikorotus' id='minimum-raise' name='minimum-raise' step='.01' value='{$this->post->minimumRaise}' style='display: none;' disabled>
+            <input type='number' placeholder='Minimikorotus' id='minimum-raise' name='minimum-raise' step='.01' value='{$this->post->minimumRaise}' style='display: {$this->isVisible($this->post->sellType === "auction")}' disabled>
             <input type='checkbox' id='is-price-suggestion' value='1' name='is-price-suggestion' {$this->isChecked($this->post->isPriceSuggestion)}>
             <label for='is-price-suggestion'>Ostaja saa ehdottaa hintaa</label>
           </div>
@@ -66,7 +66,7 @@ class EditController
             <label for='is-fetch'>Nouto</label>
             <input type='checkbox' id='is-delivery' value='1' name='is-delivery' {$this->isChecked($this->post->deliveryDetails->isDelivery)}>
             <label for='is-delivery'>Toimitus</label>
-            <input type='number' placeholder='Toimituskulut Suomeen' id='delivery-fee' name='delivery-fee' step='.01' style='display: none;' disabled>
+            <input type='number' placeholder='Toimituskulut Suomeen' id='delivery-fee' name='delivery-fee' step='.01' value='{$this->post->deliveryDetails->deliveryFee}' style='display: {$this->isVisible($this->post->deliveryDetails->isDelivery)}'>
           </div>
           <textarea placeholder='Muut toimitus-/palautusehdot' name='delivery-terms'>{$this->post->deliveryDetails->deliveryTerms}</textarea>
           <div>
@@ -131,6 +131,11 @@ class EditController
         <label for='$itemCondition'>$itemConditionsLabels[$key]</label>
       ";
     }
+  }
+
+  private function isVisible($condition): string
+  {
+    return $condition ? "inline-block;" : "none;";
   }
 
   private function isChecked($condition): string

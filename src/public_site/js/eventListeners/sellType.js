@@ -1,10 +1,9 @@
 const minimumRaiseInputId = "minimum-raise";
 const buyNowRadioButtonId = "buy-now";
 const auctionRadioButtonId = "auction";
-let isBuyNow = true;
 
 const showHideMinimumRaiseInput = () => {
-  isBuyNow = !isBuyNow;
+  const isBuyNow = document.getElementById(buyNowRadioButtonId).checked;
 
   if (isBuyNow) {
     ElementDisplay.change(minimumRaiseInputId, "none");

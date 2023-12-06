@@ -20,11 +20,11 @@ TODO:
     - Create posts on Huutonet with API
 - Edit post page
   - Frontend
-    - Show current values and then inputs for changing them.
+    - Show current values and then inputs for changing them. - COMPLETE
       - Radio buttons - COMPLETE
       - Images - COMPLETE
       - activeTimeBegin date - COMPLETE
-      - If checkbox conditions are true then the inputs should be shown for them.
+      - If checkbox conditions are true then the inputs should be shown for them. - COMPLETE
       - Category - COMPLETE
   - Backend
     - Update post
