@@ -1,18 +1,32 @@
-<p>NOTE: readme not ready!</p>
-<h1>Basic-Project-Structure</h1>
+<h1>Huutonet automatization program</h1>
 <h2>About</h2>
 <p style='font-size: 16px; text-align: justify; text-justify: inter-word;'>
-  This is my foundation for all my PHP web projects. I use REST & OOP principles.
-  Including some common JS and SCSS files too. Filled with PHPDoc & JSDoc.
-  There's two branches one with comments and then the main branch without comments.
-  This README file also serves as a template for my other projects.
+  This is a program for publishing posts to <a href='https://huuto.net'>Huutonet</a>.
+  The goal of the program is to help with the post management and is a solution
+  for easily re-publishing existing posts to Huutonet.
+  With this program the user can create, edit and delete posts which are saved
+  in a database.
+  The saved posts can then be selected from a browse posts page where the post
+  active time can be chosen and then with a single button click the program will
+  use the Huutonet API to publish the selected posts on Huutonet.
+  The user interface of the program is in Finnish.
+  This program doesn't save the authentication (username & password) to Huutonet
+  which are needed for publishing the posts because that is against the terms of
+  usage of the Huutonet API.
+  This program has no fee for usage and is completely free to use.
+  I'm not planning to host this application myself and the user will need to
+  self-host the application and the database locally.
 </p>
-<h2>Usage</h2>
+<h2>How to use</h2>
 <p style='font-size: 16px; text-align: justify; text-justify: inter-word;'>
-  When I start a new PHP project, I copy these files which gives the project a nice
-  structure and efficiency when starting a new project. Then I'll usually install sass and
-  start it up. Then I can easily start working on the project with a clean and
-  familiar structure that I enjoy using.
+  Posts can be created with a form where the user will input all the necessary
+  information about the post.
+  The created posts can then be edited if needed and also deleted.
+  In the browse posts page the user can then select which posts to publish to
+  Huutonet and specify a start active time and stop active time for the post.
+  Before publishing the program will ask for the username and password used in
+  Huutonet, these details are not saved by the program and will always be neeeded
+  to be typed again in the publishing process.
 </p>
 <h2>Project Languages</h2>
 <ul style='font-size 16px;'>
@@ -20,7 +34,11 @@
   <li>JavaScript ES6</li>
   <li>Sass 8.0.0</li>
 </ul>
-<h2>Project Libraries</h2>
+<h2>External APIs used by program</h2>
 <ul style='font-size: 16px;'>
-
+  <li><a href='https://dev.huuto.net/index.html'>Huutonet API</a></li>
 </ul>
+<h2>Screenshots of the program</h2>
+<h3>Home page</h3>
+
+![Home page](README_assets/home.png)
