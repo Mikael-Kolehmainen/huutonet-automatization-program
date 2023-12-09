@@ -268,10 +268,20 @@ class PostController
   public function uploadPost(): void
   {
     // TODO:
-    // 1. if the checkbox for changing the active time is checked then update the active time for all the posts.
+    // DONE - 1. if the checkbox for changing the active time is checked then update the active time for all the selected posts.
     // 2. Get all the selected posts from the database
     // 3. Create the posts in Huutonet with the API
     // 4. Redirect to success page (display links to the created posts in Huutonet, if possible)
-    print_r(ServerRequestManager::postSelectedPosts());
+    $selectedPostsIds = ServerRequestManager::postSelectedPosts();
+
+    if (ServerRequestManager::postChangeActiveTime()) {
+      foreach ($selectedPostsIds as $selectedPostId) {
+        $postModel = new PostModel($this->db);
+        $postModel->id = $selectedPostId;
+        $postModel->activeTimeBegin = ServerRequestManager::postActiveTimeBegin();
+        $postModel->activeTimeEnd = $this->getActiveTimeEnd();
+        $postModel->updateActiveTimes();
+      }
+    }
   }
 }

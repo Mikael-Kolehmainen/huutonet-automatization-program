@@ -166,6 +166,24 @@ class PostModel
     );
   }
 
+  public function updateActiveTimes(): void
+  {
+    $this->db->insert(
+      'UPDATE ' . self::TABLE_NAME .
+      ' SET ' . self::FIELD_ACTIVE_TIME_BEGIN . ' = ?,' .
+      self::FIELD_ACTIVE_TIME_END . ' = ?' .
+      ' WHERE ' . self::FIELD_ID . ' = ?',
+      [
+        ['ssi'],
+        [
+          $this->activeTimeBegin,
+          $this->activeTimeEnd,
+          $this->id
+        ]
+      ]
+    );
+  }
+
   public function delete(): void
   {
     $this->db->remove(

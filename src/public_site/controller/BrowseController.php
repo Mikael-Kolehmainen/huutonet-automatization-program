@@ -26,13 +26,13 @@ class BrowseController
             <label for='change-active-time'>Määritä aukioloaika kaikkille valituille ilmoituksille.</label>
           </div>
           <div id='active-time-changers' style='display: none;'>
-            <label for='active-time-start'>Aukioloaika - alku</label>
-            <input type='date' name='active-time-start'>
+            <label for='active-time-begin'>Aukioloaika - alku</label>
+            <input type='date' name='active-time-begin'>
             <label for='active-time-end'>Aukioloaika - päättyy</label>
             <div class='radio-group'>
-              <input type='radio' id='14-days' value='14 päivää' name='active-time-end'>
+              <input type='radio' id='14-days' value='14' name='active-time-end'>
               <label for='14-days'>14 päivää</label>
-              <input type='radio' id='7-days' value='7 päivää' name='active-time-end'>
+              <input type='radio' id='7-days' value='7' name='active-time-end'>
               <label for='7-days'>7 päivää</label>
             </div>
           </div>

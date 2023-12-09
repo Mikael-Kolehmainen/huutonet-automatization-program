@@ -177,12 +177,12 @@ class ServerRequestManager
 
   public static function postSelectedPosts(): array
   {
-    return $_POST[self::SELECTED_POSTS];
+    return $_POST[self::SELECTED_POSTS] ? $_POST[self::SELECTED_POSTS] : [];
   }
 
   public static function postChangeActiveTime(): string
   {
-    return $_POST[self::CHANGE_ACTIVE_TIME];
+    return $_POST[self::CHANGE_ACTIVE_TIME] ? $_POST[self::CHANGE_ACTIVE_TIME] : "0";
   }
 
   public static function postHuutonetUsername(): string
