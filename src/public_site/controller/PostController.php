@@ -142,6 +142,12 @@ class PostController
   public function getPostWithUriId()
   {
     $this->postId = ServerRequestManager::getUriParts()[3];
+    return $this->getPost();
+  }
+
+  /** @return mixed */
+  private function getPost()
+  {
     $postModel = new PostModel($this->db);
     $postModel->id = $this->postId;
     $post = $postModel->load();
@@ -269,7 +275,7 @@ class PostController
   {
     // TODO:
     // DONE - 1. if the checkbox for changing the active time is checked then update the active time for all the selected posts.
-    // 2. Get all the selected posts from the database
+    // DONE - 2. Get all the selected posts from the database
     // 3. Create the posts in Huutonet with the API
     // 4. Redirect to success page (display links to the created posts in Huutonet, if possible)
     $selectedPostsIds = ServerRequestManager::postSelectedPosts();
@@ -282,6 +288,11 @@ class PostController
         $postModel->activeTimeEnd = $this->getActiveTimeEnd();
         $postModel->updateActiveTimes();
       }
+    }
+
+    foreach ($selectedPostsIds as $selectedPostId) {
+      $this->postId = $selectedPostId;
+      $post = $this->getPost();
     }
   }
 }
