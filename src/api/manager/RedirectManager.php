@@ -13,4 +13,9 @@ class RedirectManager
   {
     echo "<script>window.location.href = '/index.php/browse-posts';</script>";
   }
+
+  public static function redirectToUploadSuccess(): void
+  {
+    echo "<script>window.location.href = '/index.php/upload-success';</script>";
+  }
 }

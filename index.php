@@ -5,6 +5,7 @@ use public_site\controller\ErrorController;
 use public_site\controller\HomeController;
 use public_site\controller\BrowseController;
 use public_site\controller\NewController;
+use public_site\controller\SuccessController;
 use public_site\controller\PostController;
 use api\manager\ServerRequestManager;
 
@@ -62,6 +63,9 @@ switch ($uri[2]) {
         }
         break;
     }
+  case "upload-success":
+    showUploadSuccess();
+    break;
   case "error":
     showError("Error title", "This is the error page.", "/index.php");
     break;
@@ -127,6 +131,12 @@ function uploadPost(): void
 {
   $postController = new PostController();
   $postController->uploadPost();
+}
+
+function showUploadSuccess(): void
+{
+  $successController = new SuccessController();
+  $successController->showSuccessPage();
 }
 
 /**

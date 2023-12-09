@@ -298,5 +298,7 @@ class PostController
       $this->postId = $selectedPostId;
       $post = $this->getPost();
     }
+
+    RedirectManager::redirectToUploadSuccess();
   }
 }

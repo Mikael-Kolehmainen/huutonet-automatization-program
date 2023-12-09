@@ -9,6 +9,10 @@ class HomeController
   public function showHomePage(): void
   {
     $this->showHeader();
+    echo "
+        <title>Huutonet automatisointi ohjelma</title>
+      </head>
+    ";
   }
 
   private function showHeader(): void

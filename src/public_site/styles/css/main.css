@@ -186,3 +186,9 @@ table {
     margin: 45px auto 0 auto;
     display: flex;
     justify-content: space-between; }
+
+.box {
+  width: fit-content;
+  margin: auto; }
+  .box p {
+    text-align: center; }
