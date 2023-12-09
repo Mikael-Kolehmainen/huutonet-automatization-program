@@ -4,7 +4,20 @@ namespace api\manager;
 
 class HuutonetManager
 {
+  /** @var string */
   private $rootUrl = "https://api.huuto.net/1.1";
+  /** @var string */
+
+  private $username;
+
+  /** @var string */
+  private $password;
+
+  public function __construct($username="", $password="")
+  {
+    $this->username = $username;
+    $this->password = $password;
+  }
 
   public function fetchCategories(): mixed
   {
@@ -32,5 +45,21 @@ class HuutonetManager
     }
 
     return $categories;
+  }
+
+  public function authenticateUser(): string
+  {
+    $parameters = [
+      "username" => $this->username,
+      "password" => $this->password
+    ];
+    $authenticationCurl = new CurlManager(
+      "$this->rootUrl/authentication",
+      "POST",
+      $parameters
+    );
+
+    $response = $authenticationCurl->fetch();
+    return $response["authentication"]["token"]["id"];
   }
 }

@@ -31,4 +31,4 @@ TODO:
 - Success page (go here after posts have been uploaded to Huutonet)
   - Frontend
     - Display Huutonet links to created posts
-- Create README file
+- Create README file - COMPLETE

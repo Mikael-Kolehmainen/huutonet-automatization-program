@@ -2,6 +2,7 @@
 
 namespace public_site\controller;
 
+use api\manager\HuutonetManager;
 use api\manager\RedirectManager;
 use api\manager\ServerRequestManager;
 use api\model\Database;
@@ -277,7 +278,7 @@ class PostController
     // DONE - 1. if the checkbox for changing the active time is checked then update the active time for all the selected posts.
     // DONE - 2. Get all the selected posts from the database
     // 3. Create the posts in Huutonet with the API
-    // - authentication
+    // - authentication (if auth failed then let the user know) (check what is returned in authenticateUser() and return something we can use to see)
     // - create post with draft status
     // - add images to post
     // - publish post (change status to publish)
@@ -293,6 +294,12 @@ class PostController
         $postModel->updateActiveTimes();
       }
     }
+
+    $huutonetManager = new HuutonetManager(
+      ServerRequestManager::postHuutonetUsername(),
+      ServerRequestManager::postHuutonetPassword()
+    );
+    $authenticationToken = $huutonetManager->authenticateUser();
 
     foreach ($selectedPostsIds as $selectedPostId) {
       $this->postId = $selectedPostId;
