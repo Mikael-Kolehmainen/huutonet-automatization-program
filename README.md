@@ -39,6 +39,18 @@
   <li><a href='https://dev.huuto.net/index.html'>Huutonet API</a></li>
 </ul>
 <h2>Screenshots of the program</h2>
-<h3>Home page</h3>
+<h3>Home</h3>
 
-![Home page](README_assets/home.png)
+![Home](README_assets/home.png)
+
+<h3>Create post</h3>
+
+![Create post](README_assets/create.png)
+
+<h3>Browse posts</h3>
+
+![Browse posts](README_assets/browse.png)
+
+<h3>Edit post</h3>
+
+![Edit post](README_assets/edit.png)
