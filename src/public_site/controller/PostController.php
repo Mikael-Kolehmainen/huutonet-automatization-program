@@ -277,6 +277,10 @@ class PostController
     // DONE - 1. if the checkbox for changing the active time is checked then update the active time for all the selected posts.
     // DONE - 2. Get all the selected posts from the database
     // 3. Create the posts in Huutonet with the API
+    // - authentication
+    // - create post with draft status
+    // - add images to post
+    // - publish post (change status to publish)
     // 4. Redirect to success page (display links to the created posts in Huutonet, if possible)
     $selectedPostsIds = ServerRequestManager::postSelectedPosts();
 
