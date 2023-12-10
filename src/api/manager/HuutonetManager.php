@@ -47,7 +47,7 @@ class HuutonetManager
     return $categories;
   }
 
-  public function authenticateUser(): string
+  public function authenticateUser(): string|null
   {
     $parameters = [
       "username" => $this->username,
