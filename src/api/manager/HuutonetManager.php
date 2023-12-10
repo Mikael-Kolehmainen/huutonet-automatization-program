@@ -13,6 +13,12 @@ class HuutonetManager
   /** @var string */
   private $password;
 
+  /** @var string */
+  private $authenticationToken;
+
+  /** @var array */
+  public $postItem;
+
   public function __construct($username="", $password="")
   {
     $this->username = $username;
@@ -29,8 +35,6 @@ class HuutonetManager
     foreach ($categoriesObj as $categoryObj) {
       if ($categoryCounter++ <= 3) continue;
       foreach ($categoryObj as $category) {
-        array_push($categories, [ "id" => $category["id"], "title" => $category["title"]]);
-
         $subCategoryCurl = new CurlManager($category["links"]["subcategories"]);
         $subCategoriesObj = $subCategoryCurl->fetch();
 
@@ -38,7 +42,16 @@ class HuutonetManager
         foreach ($subCategoriesObj as $subCategoryObj) {
           if ($subCategoryCounter++ <= 3) continue;
           foreach ($subCategoryObj as $subCategory) {
-            array_push($categories, [ "id" => $subCategory["id"], "title" => $subCategory["title"]]);
+            $subSubCategoryCurl = new CurlManager($subCategory["links"]["subcategories"]);
+            $subSubCategoriesObj = $subSubCategoryCurl->fetch();
+
+            $subSubCategoryCounter = 0;
+            foreach ($subSubCategoriesObj as $subSubCategoryObj) {
+              if ($subSubCategoryCounter++ <= 3) continue;
+              foreach ($subSubCategoryObj as $subSubCategory) {
+                array_push($categories, [ "id" => $subSubCategory["id"], "title" => $subSubCategory["title"] ]);
+              }
+            }
           }
         }
       }
@@ -60,6 +73,19 @@ class HuutonetManager
     );
 
     $response = $authenticationCurl->fetch();
-    return $response["authentication"]["token"]["id"];
+    $this->authenticationToken = $response["authentication"]["token"]["id"];
+    return $this->authenticationToken;
+  }
+
+  public function createItem(): array
+  {
+    $createItemCurl = new CurlManager(
+      "$this->rootUrl/items",
+      "POST",
+      $this->postItem,
+      ["X-HuutoApiToken: $this->authenticationToken"]
+    );
+
+    return $createItemCurl->fetch();
   }
 }

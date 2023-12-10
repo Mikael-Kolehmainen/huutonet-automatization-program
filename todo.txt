@@ -31,4 +31,10 @@ TODO:
 - Success page (go here after posts have been uploaded to Huutonet)
   - Frontend
     - Display Huutonet links to created posts
+- Refactor category fetching
+  - The user should first choose the main category
+  - Then the subcategories will be fetched for the chosen category from which the user has to choose from
+  - Then the subsubcategories will be fetched for the chosen subcategory from which the user has to choose from
+  - Then the subsubcategory id will be saved to the database
 - Create README file - COMPLETE
+- Export MySQL database schema

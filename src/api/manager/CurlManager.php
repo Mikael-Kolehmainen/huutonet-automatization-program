@@ -13,14 +13,18 @@ class CurlManager
   /** @var array */
   private $parameters;
 
+  /** @var array */
+  private $httpHeaders;
+
   /**
    * @param string $url
    */
-  public function __construct($url, $method = "GET", $parameters = [])
+  public function __construct($url, $method = "GET", $parameters = [], $optionalHttpHeaders = [])
   {
     $this->curl = curl_init();
     $this->url = $url;
     $this->parameters = $parameters;
+    $this->httpHeaders = $optionalHttpHeaders;
 
     switch ($method) {
       case "GET":
@@ -37,11 +41,10 @@ class CurlManager
 
   private function initializeGetMethod(): void
   {
+    $this->httpHeaders[] = "Content-type: text/plain";
     curl_setopt_array($this->curl, [
       CURLOPT_URL => $this->url,
-      CURLOPT_HTTPHEADER => [
-        "Content-type: text/plain",
-      ],
+      CURLOPT_HTTPHEADER => $this->httpHeaders,
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => "",
       CURLOPT_MAXREDIRS => 10,
@@ -54,11 +57,10 @@ class CurlManager
 
   private function initializePostMethod(): void
   {
+    $this->httpHeaders[] = "Content-type: application/x-www-form-urlencoded";
     curl_setopt_array($this->curl, [
       CURLOPT_URL => $this->url,
-      CURLOPT_HTTPHEADER => [
-        "Content-type: application/x-www-form-urlencoded",
-      ],
+      CURLOPT_HTTPHEADER => $this->httpHeaders,
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => "",
       CURLOPT_MAXREDIRS => 10,

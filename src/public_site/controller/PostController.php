@@ -20,6 +20,9 @@ class PostController
   /** @var int */
   private $postId;
 
+  /** @var object */
+  private $post;
+
   /** @var Database */
   private $db;
 
@@ -306,9 +309,84 @@ class PostController
 
     foreach ($selectedPostsIds as $selectedPostId) {
       $this->postId = $selectedPostId;
-      $post = $this->getPost();
+      $this->post = $this->getPost();
+      $huutonetManager->postItem = [
+        "buyNowPrice" => $this->post->price,
+        "categoryId" => $this->post->category,
+        "closingTime" => $this->post->activeTimeEnd,
+        "condition" => $this->post->itemCondition,
+        "description" => $this->post->description,
+        "deliveryMethods" => $this->getHuutonetDeliveryMethods(),
+        "deliveryTerms" => $this->post->deliveryDetails->deliveryTerms,
+        "identificationRequired" => $this->post->onlyToIdentifiedUsers,
+        "isLocationAbroad" => $this->post->isOutsideOfFinland,
+        "paymentMethods" => $this->getHuutonetPaymentMethods(),
+        "paymentTerms" => $this->post->paymentDetails->paymentTerms,
+        "postalCode" => $this->post->zipCode,
+        "quantity" => 1,
+        "saleMethod" => $this->post->sellType,
+        "startingPrice" => $this->post->price,
+        "status" => "preview",
+        "title" => $this->post->title,
+        "offersAllowed" => $this->post->isPriceSuggestion,
+      ];
+      if ($this->isActiveTimeBeginInTheFuture()) {
+        $huutonetManager->postItem["listTime"] = $this->post->activeTimeBegin;
+      }
+      $createItemResponse = $huutonetManager->createItem();
+
+      if ($createItemResponse["errors"]) {
+        RedirectManager::redirectToBrowsePostsWithMessage(
+          "Huutonet API virhe: {$createItemResponse["errors"][0]["field"]} {$createItemResponse["errors"][0]["messages"][0]}."
+        );
+      }
     }
 
-    RedirectManager::redirectToUploadSuccess();
+    /* RedirectManager::redirectToUploadSuccess(); */
+  }
+
+  private function getHuutonetDeliveryMethods(): array
+  {
+    $deliveryMethods = [];
+
+    if ($this->post->deliveryDetails->isFetch) {
+      $deliveryMethods[] = "pickup";
+    }
+
+    if ($this->post->deliveryDetails->isDelivery) {
+      $deliveryMethods[] = "shipment";
+    }
+
+    return $deliveryMethods;
+  }
+
+  private function getHuutonetPaymentMethods(): array
+  {
+    $paymentMethods = [];
+
+    if ($this->post->paymentDetails->isBankTransfer) {
+      $paymentMethods[] = "wire-transfer";
+    }
+
+    if ($this->post->paymentDetails->isCash) {
+      $paymentMethods[] = "cash";
+    }
+
+    if ($this->post->paymentDetails->isPayPal) {
+      $paymentMethods[] = "paypal";
+    }
+
+    if ($this->post->paymentDetails->isMobilePay) {
+      $paymentMethods[] = "mobile-pay";
+    }
+
+    return $paymentMethods;
+  }
+
+  private function isActiveTimeBeginInTheFuture(): bool
+  {
+    $activeTimeBeginTimestamp = strtotime($this->post->activeTimeBegin);
+    $currentTimestamp = time();
+    return $activeTimeBeginTimestamp > $currentTimestamp;
   }
 }
