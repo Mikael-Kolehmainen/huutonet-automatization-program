@@ -28,13 +28,19 @@ class HuutonetManager
   /** @var string */
   public $itemLink;
 
+  /** @var number */
+  public $mainCategoryId;
+
+  /** @var number */
+  public $subCategoryId;
+
   public function __construct($username="", $password="")
   {
     $this->username = $username;
     $this->password = $password;
   }
 
-  public function fetchCategories(): mixed
+  public function fetchMainCategories(): mixed
   {
     $categoryCurl = new CurlManager("$this->rootUrl/categories/");
     $categoriesObj = $categoryCurl->fetch();
@@ -44,29 +50,42 @@ class HuutonetManager
     foreach ($categoriesObj as $categoryObj) {
       if ($categoryCounter++ <= 3) continue;
       foreach ($categoryObj as $category) {
-        $subCategoryCurl = new CurlManager($category["links"]["subcategories"]);
-        $subCategoriesObj = $subCategoryCurl->fetch();
-
-        $subCategoryCounter = 0;
-        foreach ($subCategoriesObj as $subCategoryObj) {
-          if ($subCategoryCounter++ <= 3) continue;
-          foreach ($subCategoryObj as $subCategory) {
-            $subSubCategoryCurl = new CurlManager($subCategory["links"]["subcategories"]);
-            $subSubCategoriesObj = $subSubCategoryCurl->fetch();
-
-            $subSubCategoryCounter = 0;
-            foreach ($subSubCategoriesObj as $subSubCategoryObj) {
-              if ($subSubCategoryCounter++ <= 3) continue;
-              foreach ($subSubCategoryObj as $subSubCategory) {
-                array_push($categories, [ "id" => $subSubCategory["id"], "title" => $subSubCategory["title"] ]);
-              }
-            }
-          }
-        }
+        array_push($categories, [ "id" => $category["id"], "title" => $category["title"] ]);
       }
     }
-
     return $categories;
+  }
+
+  public function fetchSubCategories(): mixed
+  {
+    $subCategoryCurl = new CurlManager("$this->rootUrl/categories/$this->mainCategoryId/subcategories");
+    $subCategoriesObj = $subCategoryCurl->fetch();
+    $subCategories = [];
+
+    $subCategoryCounter = 0;
+    foreach ($subCategoriesObj as $subCategoryObj) {
+      if ($subCategoryCounter++ <= 3) continue;
+      foreach ($subCategoryObj as $subCategory) {
+        array_push($subCategories, [ "id" => $subCategory["id"], "title" => $subCategory["title"] ]);
+      }
+    }
+    return $subCategories;
+  }
+
+  public function fetchSubSubCategories(): mixed
+  {
+    $subSubCategoryCurl = new CurlManager("$this->rootUrl/categories/$this->subCategoryId/subcategories");
+    $subSubCategoriesObj = $subSubCategoryCurl->fetch();
+    $subSubCategories = [];
+
+    $subSubCategoryCounter = 0;
+    foreach ($subSubCategoriesObj as $subSubCategoryObj) {
+      if ($subSubCategoryCounter++ <= 3) continue;
+      foreach ($subSubCategoryObj as $subSubCategory) {
+        array_push($subSubCategories, [ "id" => $subSubCategory["id"], "title" => $subSubCategory["title"] ]);
+      }
+    }
+    return $subSubCategories;
   }
 
   public function authenticateUser(): string|null

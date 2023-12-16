@@ -22,6 +22,7 @@ class EditController
         <script src='/src/public_site/js/eventListeners/sellType.js' defer></script>
         <script src='/src/public_site/js/eventListeners/updateMinimumRaise.js' defer></script>
         <script src='/src/public_site/js/eventListeners/imageSelector.js' defer></script>
+        <script src='/src/public_site/js/eventListeners/updateCategories.js' defer></script>
       </head>
       <section>
         <h2>Muokkaa ilmoitusta</h2>

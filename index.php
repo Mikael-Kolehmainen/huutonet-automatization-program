@@ -1,5 +1,6 @@
 <?php
 
+use public_site\controller\CategoryController;
 use public_site\controller\EditController;
 use public_site\controller\ErrorController;
 use public_site\controller\HomeController;
@@ -24,6 +25,7 @@ if ($uri[2] != "ajax") {
         <link rel='icon' type='image/x-icon' href='/src/public_site/media/icons/favicon.svg'>
         <link href='/src/public_site/styles/css/main.css' rel='stylesheet' type='text/css'>
         <script src='/src/public_site/js/common/ElementDisplay.js' defer></script>
+        <script src='/src/api/js/Data.js' defer></script>
   ";
 }
 
@@ -61,8 +63,21 @@ switch ($uri[2]) {
         if (ServerRequestManager::issetUploadPost()) {
           uploadPost();
         }
-        break;
+      break;
     }
+    break;
+  case "ajax":
+    if (ServerRequestManager::isGet() && $uri[4]) {
+      switch ($uri[3]) {
+        case "sub-categories":
+          getSubCategories();
+          break;
+        case "sub-sub-categories":
+          getSubSubCategories();
+          break;
+      }
+    }
+    break;
   case "upload-success":
     showUploadSuccess();
     break;
@@ -131,6 +146,18 @@ function uploadPost(): void
 {
   $postController = new PostController();
   $postController->uploadPost();
+}
+
+function getSubCategories(): void
+{
+  $categoryController = new CategoryController();
+  $categoryController->getSubCategoriesAsJSON();
+}
+
+function getSubSubCategories(): void
+{
+  $categoryController = new CategoryController();
+  $categoryController->getSubSubCategoriesAsJSON();
 }
 
 function showUploadSuccess(): void

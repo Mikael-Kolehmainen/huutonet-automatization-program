@@ -16,8 +16,8 @@ TODO:
     - Display posts from database. - COMPLETE
   - Backend
     - Delete post - COMPLETE
-    - Change dates for multiple posts
-    - Create posts on Huutonet with API
+    - Change dates for multiple posts - COMPLETE
+    - Create posts on Huutonet with API - COMPLETE
 - Edit post page - COMPLETE
   - Frontend - COMPLETE
     - Show current values and then inputs for changing them. - COMPLETE
@@ -28,13 +28,13 @@ TODO:
       - Category - COMPLETE
   - Backend - COMPLETE
     - Update post - COMPLETE
-- Success page (go here after posts have been uploaded to Huutonet)
-  - Frontend
-    - Display Huutonet links to created posts
-- Refactor category fetching (AJAX)
-  - The user should first choose the main category
-  - Then the subcategories will be fetched for the chosen category from which the user has to choose from
-  - Then the subsubcategories will be fetched for the chosen subcategory from which the user has to choose from
-  - Then the subsubcategory id will be saved to the database
+- Success page (go here after posts have been uploaded to Huutonet) - COMPLETE
+  - Frontend - COMPLETE
+    - Display Huutonet links to created posts - COMPLETE
+- Refactor category fetching (AJAX) - COMPLETE
+  - The user should first choose the main category - COMPLETE
+  - Then the subcategories will be fetched for the chosen category from which the user has to choose from - COMPLETE
+  - Then the subsubcategories will be fetched for the chosen subcategory from which the user has to choose from - COMPLETE
+  - Then the subsubcategory id will be saved to the database - COMPLETE
 - Create README file - COMPLETE
 - Export MySQL database schema
