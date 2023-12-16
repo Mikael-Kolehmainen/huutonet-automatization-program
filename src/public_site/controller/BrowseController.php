@@ -15,7 +15,7 @@ class BrowseController
       <script src='/src/public_site/js/eventListeners/changeActiveTime.js' defer></script>
       <section>
         <h2>Ilmoitukset</h2>
-        <form action='/index.php/post/upload' method='POST'>
+        <form action='/index.php/post/upload' method='POST' class='browse-form'>
     ";
 
     $this->showPosts();

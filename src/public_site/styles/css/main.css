@@ -74,8 +74,10 @@ a i {
     background-color: #50555F; }
 
 form {
-  width: 90%;
+  width: 60%;
   margin: auto auto 50px auto; }
+  form.browse-form {
+    width: 90%; }
   form .container {
     width: 50%;
     margin: 20px auto auto auto; }
