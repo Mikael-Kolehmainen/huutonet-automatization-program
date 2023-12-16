@@ -275,11 +275,38 @@ class PostController
     $imageController->deleteImage();
   }
 
-  // TODO: clean this function
   public function uploadPost(): void
   {
     $selectedPostsIds = ServerRequestManager::postSelectedPosts();
 
+    $this->changePostActiveTimes($selectedPostsIds);
+
+    $huutonetManager = new HuutonetManager(
+      ServerRequestManager::postHuutonetUsername(),
+      ServerRequestManager::postHuutonetPassword()
+    );
+    $this->authenticateHuutonetUser($huutonetManager);
+
+    foreach ($selectedPostsIds as $selectedPostId) {
+      $createItemResponse = $this->createHuutonetItem($selectedPostId, $huutonetManager);
+      $huutonetManager->imagesUrl = $createItemResponse["links"]["images"];
+
+      foreach ($this->post->imageDetails as $imageDetails) {
+        $this->addImageToHuutonetItem($imageDetails, $huutonetManager);
+      }
+
+      $huutonetManager->itemLink = $createItemResponse["links"]["self"];
+      $this->publishHuutonetItem($huutonetManager);
+    }
+
+    RedirectManager::redirectToUploadSuccess();
+  }
+
+  /**
+   * @param array $selectedPostsIds
+   */
+  private function changePostActiveTimes($selectedPostsIds): void
+  {
     if (ServerRequestManager::postChangeActiveTime()) {
       foreach ($selectedPostsIds as $selectedPostId) {
         $postModel = new PostModel($this->db);
@@ -289,77 +316,82 @@ class PostController
         $postModel->updateActiveTimes();
       }
     }
+  }
 
-    $huutonetManager = new HuutonetManager(
-      ServerRequestManager::postHuutonetUsername(),
-      ServerRequestManager::postHuutonetPassword()
-    );
+  /**
+   * @param HuutonetManager $huutonetManager
+   */
+  private function authenticateHuutonetUser($huutonetManager): string
+  {
     $authenticationToken = $huutonetManager->authenticateUser();
     if (!$authenticationToken) {
       RedirectManager::redirectToBrowsePostsWithMessage("Huutonet kirjautuminen ei onnistunut, yritä uudelleen.");
     }
+    return $authenticationToken;
+  }
 
-    foreach ($selectedPostsIds as $selectedPostId) {
-      $this->postId = $selectedPostId;
-      $this->post = $this->getPost();
-      $huutonetManager->postItem = [
-        "buyNowPrice" => $this->post->price,
-        "categoryId" => $this->post->category,
-        "closingTime" => $this->post->activeTimeEnd,
-        "condition" => $this->post->itemCondition,
-        "description" => $this->post->description,
-        "deliveryMethods" => $this->getHuutonetDeliveryMethods(),
-        "deliveryTerms" => $this->post->deliveryDetails->deliveryTerms,
-        "identificationRequired" => $this->post->onlyToIdentifiedUsers,
-        "isLocationAbroad" => $this->post->isOutsideOfFinland,
-        "paymentMethods" => $this->getHuutonetPaymentMethods(),
-        "paymentTerms" => $this->post->paymentDetails->paymentTerms,
-        "postalCode" => $this->post->zipCode,
-        "quantity" => 1,
-        "saleMethod" => $this->post->sellType,
-        "startingPrice" => $this->post->price,
-        "status" => "preview",
-        "title" => $this->post->title,
-        "offersAllowed" => $this->post->isPriceSuggestion,
-      ];
-      if ($this->isActiveTimeBeginInTheFuture()) {
-        $huutonetManager->postItem["listTime"] = $this->post->activeTimeBegin;
-      }
-      $createItemResponse = $huutonetManager->createItem();
-      $itemLink = $createItemResponse["links"]["self"];
+  private function createHuutonetItem($selectedPostId, $huutonetManager): mixed
+  {
+    $this->postId = $selectedPostId;
+    $this->post = $this->getPost();
+    $huutonetManager->postItem = [
+      "buyNowPrice" => $this->post->price,
+      "categoryId" => $this->post->category,
+      "closingTime" => $this->post->activeTimeEnd,
+      "condition" => $this->post->itemCondition,
+      "description" => $this->post->description,
+      "deliveryMethods" => $this->getHuutonetDeliveryMethods(),
+      "deliveryTerms" => $this->post->deliveryDetails->deliveryTerms,
+      "identificationRequired" => $this->post->onlyToIdentifiedUsers,
+      "isLocationAbroad" => $this->post->isOutsideOfFinland,
+      "paymentMethods" => $this->getHuutonetPaymentMethods(),
+      "paymentTerms" => $this->post->paymentDetails->paymentTerms,
+      "postalCode" => $this->post->zipCode,
+      "quantity" => 1,
+      "saleMethod" => $this->post->sellType,
+      "startingPrice" => $this->post->price,
+      "status" => "preview",
+      "title" => $this->post->title,
+      "offersAllowed" => $this->post->isPriceSuggestion,
+    ];
+    if ($this->isActiveTimeBeginInTheFuture()) {
+      $huutonetManager->postItem["listTime"] = $this->post->activeTimeBegin;
+    }
+    $createItemResponse = $huutonetManager->createItem();
 
-      if ($createItemResponse["errors"]) {
-        RedirectManager::redirectToBrowsePostsWithMessage(
-          "Huutonet API virhe: {$createItemResponse["errors"][0]["field"]} {$createItemResponse["errors"][0]["messages"][0]}."
-        );
-      }
-
-      $huutonetManager->imagesUrl = $createItemResponse["links"]["images"];
-      foreach ($this->post->imageDetails as $imageDetails) {
-        $imageAbsolutePath = realpath(__DIR__ . "/../../.." . $imageDetails->imagePath);
-        $huutonetManager->postImage = [
-          "image" => new \CURLFile($imageAbsolutePath)
-        ];
-        $addImageResponse = $huutonetManager->addImageToItem();
-
-        if ($addImageResponse["errors"]) {
-          RedirectManager::redirectToBrowsePostsWithMessage(
-            "Huutonet API virhe: {$addImageResponse["errors"][0]["field"]} {$addImageResponse["errors"][0]["messages"][0]}."
-          );
-        }
-      }
-
-      $huutonetManager->itemLink = $itemLink;
-      $publishItemResponse = $huutonetManager->publishItem();
-
-      if ($publishItemResponse["errors"]) {
-        RedirectManager::redirectToBrowsePostsWithMessage(
-          "Huutonet API virhe: {$publishItemResponse["errors"][0]["field"]} {$publishItemResponse["errors"][0]["messages"][0]}."
-        );
-      }
+    if ($createItemResponse["errors"]) {
+      RedirectManager::redirectToBrowsePostsWithMessage(
+        "Huutonet API virhe: {$createItemResponse["errors"][0]["field"]} {$createItemResponse["errors"][0]["messages"][0]}."
+      );
     }
 
-    RedirectManager::redirectToUploadSuccess();
+    return $createItemResponse;
+  }
+
+  private function addImageToHuutonetItem($imageDetails, $huutonetManager): void
+  {
+    $imageAbsolutePath = realpath(__DIR__ . "/../../.." . $imageDetails->imagePath);
+    $huutonetManager->postImage = [
+      "image" => new \CURLFile($imageAbsolutePath)
+    ];
+    $addImageResponse = $huutonetManager->addImageToItem();
+
+    if ($addImageResponse["errors"]) {
+      RedirectManager::redirectToBrowsePostsWithMessage(
+        "Huutonet API virhe: {$addImageResponse["errors"][0]["field"]} {$addImageResponse["errors"][0]["messages"][0]}."
+      );
+    }
+  }
+
+  /** @param HuutonetManager $huutonetManager */
+  private function publishHuutonetItem($huutonetManager): void
+  {
+    $publishItemResponse = $huutonetManager->publishItem();
+    if ($publishItemResponse["errors"]) {
+      RedirectManager::redirectToBrowsePostsWithMessage(
+        "Huutonet API virhe: {$publishItemResponse["errors"][0]["field"]} {$publishItemResponse["errors"][0]["messages"][0]}."
+      );
+    }
   }
 
   private function getHuutonetDeliveryMethods(): array
