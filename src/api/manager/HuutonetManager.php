@@ -6,8 +6,11 @@ class HuutonetManager
 {
   /** @var string */
   private $rootUrl = "https://api.huuto.net/1.1";
-  /** @var string */
 
+  /** @var string */
+  public $imagesUrl;
+
+  /** @var string */
   private $username;
 
   /** @var string */
@@ -18,6 +21,9 @@ class HuutonetManager
 
   /** @var array */
   public $postItem;
+
+  /** @var array */
+  public $postImage;
 
   public function __construct($username="", $password="")
   {
@@ -87,5 +93,17 @@ class HuutonetManager
     );
 
     return $createItemCurl->fetch();
+  }
+
+  public function addImageToItem()
+  {
+    $addImageCurl = new CurlManager(
+      $this->imagesUrl,
+      "POST",
+      $this->postImage,
+      ["X-HuutoApiToken: $this->authenticationToken"]
+    );
+
+    return $addImageCurl->fetch();
   }
 }

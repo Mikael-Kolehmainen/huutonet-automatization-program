@@ -57,7 +57,7 @@ class CurlManager
 
   private function initializePostMethod(): void
   {
-    $this->httpHeaders[] = "Content-type: application/x-www-form-urlencoded";
+    $this->httpHeaders[] = "Content-type: multipart/form-data";
     curl_setopt_array($this->curl, [
       CURLOPT_URL => $this->url,
       CURLOPT_HTTPHEADER => $this->httpHeaders,
@@ -68,7 +68,7 @@ class CurlManager
       CURLOPT_FOLLOWLOCATION => true,
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => "POST",
-      CURLOPT_POSTFIELDS => http_build_query($this->parameters)
+      CURLOPT_POSTFIELDS => $this->parameters
     ]);
   }
 

@@ -135,7 +135,7 @@ class PostController
     return $deliveryController->getDelivery();
   }
 
-  private function getImageDetails()
+  private function getImageDetails(): array
   {
     $imageController = new ImageController();
     $imageController->postId = $this->postId;
@@ -275,6 +275,7 @@ class PostController
     $imageController->deleteImage();
   }
 
+  // TODO: clean this function
   public function uploadPost(): void
   {
     // TODO:
@@ -282,8 +283,8 @@ class PostController
     // DONE - 2. Get all the selected posts from the database
     // 3. Create the posts in Huutonet with the API
     // DONE - authentication (if auth failed then let the user know) (check what is returned in authenticateUser() and return something we can use to see)
-    // - create post with draft status
-    // - add images to post
+    // DONE - create post with draft status
+    // DONE - add images to post
     // - publish post (change status to publish)
     // 4. Redirect to success page (display links to the created posts in Huutonet, if possible)
     $selectedPostsIds = ServerRequestManager::postSelectedPosts();
@@ -339,6 +340,14 @@ class PostController
         RedirectManager::redirectToBrowsePostsWithMessage(
           "Huutonet API virhe: {$createItemResponse["errors"][0]["field"]} {$createItemResponse["errors"][0]["messages"][0]}."
         );
+      }
+
+      $huutonetManager->imagesUrl = $createItemResponse["links"]["images"];
+      foreach ($this->post->imageDetails as $imageDetails) {
+        $huutonetManager->postImage = [
+          "image" => new \CURLFile($imageDetails->imagePath)
+        ];
+        $huutonetManager->addImageToItem();
       }
     }
 
