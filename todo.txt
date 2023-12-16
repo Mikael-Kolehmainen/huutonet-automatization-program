@@ -37,4 +37,4 @@ TODO:
   - Then the subsubcategories will be fetched for the chosen subcategory from which the user has to choose from - COMPLETE
   - Then the subsubcategory id will be saved to the database - COMPLETE
 - Create README file - COMPLETE
-- Export MySQL database schema
+- Export MySQL database schema - COMPLETE

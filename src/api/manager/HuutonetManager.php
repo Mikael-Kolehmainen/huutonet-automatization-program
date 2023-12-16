@@ -109,7 +109,7 @@ class HuutonetManager
   {
     $createItemCurl = new CurlManager(
       "$this->rootUrl/items",
-      "POST",
+      "JSON",
       $this->postItem,
       ["X-HuutoApiToken: $this->authenticationToken"]
     );

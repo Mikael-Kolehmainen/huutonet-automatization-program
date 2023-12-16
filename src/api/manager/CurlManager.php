@@ -33,6 +33,9 @@ class CurlManager
       case "POST":
         $this->initializePostMethod();
         break;
+      case "JSON":
+        $this->initializeJsonMethod();
+        break;
       case "PUT":
         $this->initializePutMethod();
         break;
@@ -72,6 +75,23 @@ class CurlManager
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => "POST",
       CURLOPT_POSTFIELDS => $this->parameters
+    ]);
+  }
+
+  private function initializeJsonMethod(): void
+  {
+    $this->httpHeaders[] = "Content-type: application/json";
+    curl_setopt_array($this->curl, [
+      CURLOPT_URL => $this->url,
+      CURLOPT_HTTPHEADER => $this->httpHeaders,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "POST",
+      CURLOPT_POSTFIELDS => json_encode($this->parameters)
     ]);
   }
 
