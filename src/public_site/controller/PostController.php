@@ -278,15 +278,6 @@ class PostController
   // TODO: clean this function
   public function uploadPost(): void
   {
-    // TODO:
-    // DONE - 1. if the checkbox for changing the active time is checked then update the active time for all the selected posts.
-    // DONE - 2. Get all the selected posts from the database
-    // 3. Create the posts in Huutonet with the API
-    // DONE - authentication (if auth failed then let the user know) (check what is returned in authenticateUser() and return something we can use to see)
-    // DONE - create post with draft status
-    // DONE - add images to post
-    // - publish post (change status to publish)
-    // 4. Redirect to success page (display links to the created posts in Huutonet, if possible)
     $selectedPostsIds = ServerRequestManager::postSelectedPosts();
 
     if (ServerRequestManager::postChangeActiveTime()) {
@@ -347,7 +338,7 @@ class PostController
       foreach ($this->post->imageDetails as $imageDetails) {
         $imageAbsolutePath = realpath(__DIR__ . "/../../.." . $imageDetails->imagePath);
         $huutonetManager->postImage = [
-          "image" => $imageAbsolutePath
+          "image" => new \CURLFile($imageAbsolutePath)
         ];
         $addImageResponse = $huutonetManager->addImageToItem();
 
@@ -358,8 +349,14 @@ class PostController
         }
       }
 
-      /* $huutonetManager->itemLink = $itemLink;
-      $publishItemResponse = $huutonetManager->publishItem(); */
+      $huutonetManager->itemLink = $itemLink;
+      $publishItemResponse = $huutonetManager->publishItem();
+
+      if ($publishItemResponse["errors"]) {
+        RedirectManager::redirectToBrowsePostsWithMessage(
+          "Huutonet API virhe: {$publishItemResponse["errors"][0]["field"]} {$publishItemResponse["errors"][0]["messages"][0]}."
+        );
+      }
     }
 
     RedirectManager::redirectToUploadSuccess();

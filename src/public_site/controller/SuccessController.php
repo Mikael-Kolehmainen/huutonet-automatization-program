@@ -17,8 +17,7 @@ class SuccessController
       </head>
       <section>
         <article class='box'>
-          <h2>Ilmoitukset luoto Huutonet:iin</h2>
-          <p>SHOW LINKS HERE</p>
+          <h2>Ilmoitukset luoto Huutonet:iin!</h2>
         </article>
       </section>
     ";
