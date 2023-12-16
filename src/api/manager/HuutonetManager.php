@@ -25,6 +25,9 @@ class HuutonetManager
   /** @var array */
   public $postImage;
 
+  /** @var string */
+  public $itemLink;
+
   public function __construct($username="", $password="")
   {
     $this->username = $username;
@@ -105,5 +108,17 @@ class HuutonetManager
     );
 
     return $addImageCurl->fetch();
+  }
+
+  public function publishItem()
+  {
+    $publishItemCurl = new CurlManager(
+      $this->itemLink,
+      "PUT",
+      ["status" => "published"],
+      ["X-HuutoApiToken: $this->authenticationToken"]
+    );
+
+    return $publishItemCurl->fetch();
   }
 }

@@ -335,6 +335,7 @@ class PostController
         $huutonetManager->postItem["listTime"] = $this->post->activeTimeBegin;
       }
       $createItemResponse = $huutonetManager->createItem();
+      $itemLink = $createItemResponse["links"]["self"];
 
       if ($createItemResponse["errors"]) {
         RedirectManager::redirectToBrowsePostsWithMessage(
@@ -344,14 +345,24 @@ class PostController
 
       $huutonetManager->imagesUrl = $createItemResponse["links"]["images"];
       foreach ($this->post->imageDetails as $imageDetails) {
+        $imageAbsolutePath = realpath(__DIR__ . "/../../.." . $imageDetails->imagePath);
         $huutonetManager->postImage = [
-          "image" => new \CURLFile($imageDetails->imagePath)
+          "image" => $imageAbsolutePath
         ];
-        $huutonetManager->addImageToItem();
+        $addImageResponse = $huutonetManager->addImageToItem();
+
+        if ($addImageResponse["errors"]) {
+          RedirectManager::redirectToBrowsePostsWithMessage(
+            "Huutonet API virhe: {$addImageResponse["errors"][0]["field"]} {$addImageResponse["errors"][0]["messages"][0]}."
+          );
+        }
       }
+
+      /* $huutonetManager->itemLink = $itemLink;
+      $publishItemResponse = $huutonetManager->publishItem(); */
     }
 
-    /* RedirectManager::redirectToUploadSuccess(); */
+    RedirectManager::redirectToUploadSuccess();
   }
 
   private function getHuutonetDeliveryMethods(): array

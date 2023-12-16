@@ -33,6 +33,9 @@ class CurlManager
       case "POST":
         $this->initializePostMethod();
         break;
+      case "PUT":
+        $this->initializePutMethod();
+        break;
       default:
         $this->initializeGetMethod();
         break;
@@ -69,6 +72,23 @@ class CurlManager
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => "POST",
       CURLOPT_POSTFIELDS => $this->parameters
+    ]);
+  }
+
+  private function initializePutMethod(): void
+  {
+    $this->httpHeaders[] = "Content-type: application/x-www-form-encoded";
+    curl_setopt_array($this->curl, [
+      CURLOPT_URL => $this->url,
+      CURLOPT_HTTPHEADER => $this->httpHeaders,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "PUT",
+      CURLOPT_POSTFIELDS => http_build_query($this->parameters)
     ]);
   }
 
