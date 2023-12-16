@@ -21,32 +21,34 @@ class BrowseController
     $this->showPosts();
 
     echo "
-          <div>
-            <input type='checkbox' id='change-active-time' value='1' name='change-active-time'>
-            <label for='change-active-time'>Määritä aukioloaika kaikkille valituille ilmoituksille.</label>
-          </div>
-          <div id='active-time-changers' style='display: none;'>
-            <label for='active-time-begin'>Aukioloaika - alku</label>
-            <input type='date' name='active-time-begin'>
-            <label for='active-time-end'>Aukioloaika - päättyy</label>
-            <div class='radio-group'>
-              <input type='radio' id='14-days' value='14' name='active-time-end'>
-              <label for='14-days'>14 päivää</label>
-              <input type='radio' id='7-days' value='7' name='active-time-end'>
-              <label for='7-days'>7 päivää</label>
+          <div class='container'>
+            <div>
+              <input type='checkbox' id='change-active-time' value='1' name='change-active-time'>
+              <label for='change-active-time'>Määritä aukioloaika kaikkille valituille ilmoituksille.</label>
             </div>
-          </div>
-          <input type='text' name='huutonet-username' placeholder='Huutonet käyttäjänimi' required>
-          <input type='password' name='huutonet-password' placeholder='Huutonet salasana' required>
-          <div class='btn-container'>
-            <input type='submit' class='btn' name='upload-post' value='Luo valittut ilmoitukset Huutonet:iin'>
-          </div>
-        </form>
-        <div class='popup' id='delete-post-popup' style='display: none;'>
-          <p id='delete-post-popup-text'>Oletko varma että haluat poistaa ilmoituksen?</p>
-          <div class='btn-container'>
-            <a class='btn' id='delete-post-cancel'>En</a>
-            <a href='/index.php/post/delete' class='btn' id='delete-post-confirm'>Kyllä</a>
+            <div id='active-time-changers' style='display: none;'>
+              <label for='active-time-begin'>Aukioloaika - alku</label>
+              <input type='date' name='active-time-begin'>
+              <label for='active-time-end'>Aukioloaika - päättyy</label>
+              <div class='radio-group'>
+                <input type='radio' id='14-days' value='14' name='active-time-end'>
+                <label for='14-days'>14 päivää</label>
+                <input type='radio' id='7-days' value='7' name='active-time-end'>
+                <label for='7-days'>7 päivää</label>
+              </div>
+            </div>
+            <input type='text' name='huutonet-username' placeholder='Huutonet käyttäjänimi' required>
+            <input type='password' name='huutonet-password' placeholder='Huutonet salasana' required>
+            <div class='btn-container'>
+              <input type='submit' class='btn' name='upload-post' value='Luo valittut ilmoitukset Huutonet:iin'>
+            </div>
+          </form>
+          <div class='popup' id='delete-post-popup' style='display: none;'>
+            <p id='delete-post-popup-text'>Oletko varma että haluat poistaa ilmoituksen?</p>
+            <div class='btn-container'>
+              <a class='btn' id='delete-post-cancel'>En</a>
+              <a href='/index.php/post/delete' class='btn' id='delete-post-confirm'>Kyllä</a>
+            </div>
           </div>
         </div>
       </section>

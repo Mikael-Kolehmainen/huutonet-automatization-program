@@ -74,8 +74,11 @@ a i {
     background-color: #50555F; }
 
 form {
-  width: 60%;
+  width: 90%;
   margin: auto auto 50px auto; }
+  form .container {
+    width: 50%;
+    margin: 20px auto auto auto; }
   form input[type=text], form textarea, form input[type=number], form input[type=date], form input[type=password], form select {
     display: block;
     box-sizing: border-box;
