@@ -1,9 +1,9 @@
 <h1>Huutonet automatization program</h1>
 <h2>About</h2>
 <p style='font-size: 16px; text-align: justify; text-justify: inter-word;'>
-  This is a program for publishing posts to <a href='https://huuto.net'>Huutonet</a>.
-  The goal of the program is to help with the post management and is a solution
-  for easily re-publishing existing posts to Huutonet.
+  This is a program for publishing posts to <a href='https://huuto.net'>Huutonet</a> 
+  that I created for a relative. The goal of the program is to help with the post 
+  management and is a solution for easily re-publishing existing posts to Huutonet.
   With this program the user can create, edit and delete posts which are saved
   in a database.
   The saved posts can then be selected from a browse posts page where the post
