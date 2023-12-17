@@ -11,7 +11,7 @@ CREATE TABLE post (
   sellType ENUM('buy-now', 'auction') NOT NULL,
   price DECIMAL(9,2) NOT NULL,
   minimumRaise DECIMAL(9,2) NULL,
-  priceSuggestion TINYINT(1) NOT NULL,
+  isPriceSuggestion TINYINT(1) NOT NULL,
   delivery_id int NOT NULL,
   payment_id int NOT NULL,
   activeTimeBegin DATETIME NOT NULL,
